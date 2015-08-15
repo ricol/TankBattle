@@ -2,6 +2,8 @@ package au.com.rmit.tankbattle.GUI;
 
 import au.com.rmit.Game2dEngine.director.Director;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.SwingUtilities;
@@ -15,10 +17,11 @@ import javax.swing.SwingUtilities;
  *
  * @author ricolwang
  */
-public class FrameMain extends javax.swing.JFrame
+public class FrameMain extends javax.swing.JFrame implements KeyListener
 
 {
 
+    TankBattleScene theScene;
     boolean bAlreadyRun;
     MouseEvent mouseEvent;
     Random theRandom = new Random();
@@ -26,8 +29,8 @@ public class FrameMain extends javax.swing.JFrame
     public FrameMain()
     {
         initComponents();
-        this.panelGame.setFocusable(true);
-        this.panelGame.requestFocus();
+
+        this.addKeyListener(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -116,11 +119,8 @@ public class FrameMain extends javax.swing.JFrame
                 {
                     public void run()
                     {
-                        Director.getSharedInstance().showScene(new TankBattleScene());
-                        panelGame.setFocusable(true);
-                        panelGame.requestFocus();
-                        panelGame.requestFocus(true);
-                        panelGame.requestFocusInWindow();
+                        theScene = new TankBattleScene();
+                        Director.getSharedInstance().showScene(theScene);
                     }
                 });
 
@@ -132,5 +132,24 @@ public class FrameMain extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelGame;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        if (this.theScene != null)
+            this.theScene.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        if (this.theScene != null)
+            this.theScene.keyReleased(e);
+    }
 
 }

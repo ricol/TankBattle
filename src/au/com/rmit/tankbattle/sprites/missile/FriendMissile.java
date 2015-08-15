@@ -5,6 +5,9 @@
  */
 package au.com.rmit.tankbattle.sprites.missile;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 /**
  *
  * @author ricolwang
@@ -12,4 +15,12 @@ package au.com.rmit.tankbattle.sprites.missile;
 public class FriendMissile extends Missile
 {
 
+    @Override
+    public void onCustomDraw(Graphics2D theGraphics2D)
+    {
+        super.onCustomDraw(theGraphics2D); //To change body of generated methods, choose Tools | Templates.
+
+        theGraphics2D.setColor(Color.RED);
+        theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
+    }
 }

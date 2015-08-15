@@ -44,6 +44,8 @@ public class Tank extends Sprite
 
         }
 
+        
+//        this.bDrawShape = true;
         this.bCollisionArbitrary = true;
     }
 
@@ -128,7 +130,7 @@ public class Tank extends Sprite
         }
     }
 
-    private void adjustPosition()
+    void adjustPosition()
     {
         double v = this.getVelocityX();
         if (v != 0)
@@ -183,5 +185,10 @@ public class Tank extends Sprite
     {
         this.setVelocityX(Common.SPEED_FRIEND_TANK);
         this.setVelocityY(0);
+    }
+    
+    public void fire()
+    {
+        
     }
 }

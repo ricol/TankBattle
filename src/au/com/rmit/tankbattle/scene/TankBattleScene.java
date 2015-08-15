@@ -17,7 +17,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -30,7 +29,7 @@ import javax.swing.Timer;
  * @author ricolwang
  */
 public class TankBattleScene extends WallScene
-    implements ActionListener, KeyListener
+    implements ActionListener
 {
 
     public boolean bGameRunning;
@@ -77,9 +76,6 @@ public class TankBattleScene extends WallScene
         }
         ).start();
 
-        this.addKeyListener(this);
-        this.setFocusable(true);
-        this.requestFocus();
     }
 
     public void addAEnemy()
@@ -369,16 +365,10 @@ public class TankBattleScene extends WallScene
         this.bGameRunning = false;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-    }
-
-    @Override
     public void keyPressed(KeyEvent e)
     {
         System.out.println(e.getKeyChar());
-        
+
         if (this.bGameRunning)
         {
             if (e.getKeyChar() == 'a')
@@ -395,7 +385,6 @@ public class TankBattleScene extends WallScene
         }
     }
 
-    @Override
     public void keyReleased(KeyEvent e)
     {
         if (this.bGameRunning)
@@ -404,5 +393,5 @@ public class TankBattleScene extends WallScene
             theFriendTank.setVelocityY(0);
         }
     }
-    
+
 }

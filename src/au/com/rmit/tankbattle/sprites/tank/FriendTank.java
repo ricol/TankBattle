@@ -15,4 +15,24 @@ public class FriendTank extends Tank
     {
         super("resource/Friend.png");
     }
+    
+    @Override
+    void adjustPosition()
+    {
+        double v = this.getVelocityX();
+        if (v != 0)
+        {
+            if (v > 0)
+                this.setAngle(Math.PI / 2);
+            else if (v < 0)
+                this.setAngle(Math.PI * 3.0 / 2.0);
+        } else
+        {
+            v = this.getVelocityY();
+            if (v > 0)
+                this.setAngle(Math.PI);
+            else if (v < 0)
+                this.setAngle(0);
+        }
+    }
 }
