@@ -19,6 +19,10 @@ public class FriendTank extends Tank
     public FriendTank()
     {
         super("resource/Friend.png");
+        
+        this.setCollisionCategory(Common.CATEGORY_FRIEND_TANK);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
     }
 
     @Override

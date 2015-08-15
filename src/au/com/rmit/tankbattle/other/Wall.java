@@ -6,6 +6,7 @@
 package au.com.rmit.tankbattle.other;
 
 import au.com.rmit.Game2dEngine.physics.sprites.WallSprite;
+import au.com.rmit.tankbattle.common.Common;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -19,7 +20,9 @@ public class Wall extends WallSprite
     {
         super();
         this.bCustomDrawing = true;
-        this.bCollisionArbitrary = true;
+        
+        this.bCollisionDetect = true;
+        this.setCollisionCategory(Common.CATEGORY_WALL);
     }
 
     @Override
@@ -27,8 +30,7 @@ public class Wall extends WallSprite
     {
         super.onCustomDraw(theGraphics2D); //To change body of generated methods, choose Tools | Templates.
         
-        theGraphics2D.setColor(Color.red);
+        theGraphics2D.setColor(Color.green);
         theGraphics2D.fillRect(0, 0, (int)this.getWidth(), (int)this.getHeight());
     }
-    
 }

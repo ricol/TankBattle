@@ -5,6 +5,7 @@
  */
 package au.com.rmit.tankbattle.sprites.missile;
 
+import au.com.rmit.tankbattle.common.Common;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -15,6 +16,15 @@ import java.awt.Graphics2D;
 public class FriendMissile extends Missile
 {
 
+    public FriendMissile()
+    {
+        super();
+        
+        this.setCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
+    }   
+    
     @Override
     public void onCustomDraw(Graphics2D theGraphics2D)
     {
@@ -22,5 +32,6 @@ public class FriendMissile extends Missile
 
         theGraphics2D.setColor(Color.RED);
         theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
+        
     }
 }

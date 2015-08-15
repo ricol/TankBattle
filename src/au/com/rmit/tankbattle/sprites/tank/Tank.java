@@ -11,18 +11,16 @@ import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.Fire;
 import au.com.rmit.tankbattle.other.Wall;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
+import au.com.rmit.tankbattle.sprites.basic.MovingObject;
 import au.com.rmit.tankbattle.sprites.missile.Missile;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import au.com.rmit.tankbattle.sprites.tank.Tank.DIRECTION;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 
 /**
  *
  * @author ricolwang
  */
-public class Tank extends Sprite
+public class Tank extends MovingObject
 {
 
     public static enum DIRECTION
@@ -35,30 +33,10 @@ public class Tank extends Sprite
 
     public Tank(String imagename)
     {
-        super(0, 0, 0, 0, 0, 0, 0);
+        super(imagename);
 
-        BufferedImage aImage;
-
-        try
-        {
-            aImage = ImageIO.read(new File(imagename));
-            this.setWidth(aImage.getWidth());
-            this.setHeight(aImage.getHeight());
-
-            this.setImage(imagename);
-
-            RectangleShape aRectangleShape = new RectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-            this.setTheShape(aRectangleShape);
-
-        } catch (IOException e)
-        {
-
-        }
-
-//        this.bDrawShape = true;
-//        this.theColorOfTheShape = Color.red;
-//        this.bDrawFrame = true;
-        this.bCollisionArbitrary = true;
+        RectangleShape aRectangleShape = new RectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        this.setTheShape(aRectangleShape);
     }
 
     @Override
@@ -66,7 +44,6 @@ public class Tank extends Sprite
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
 
-        System.out.println("Tank.onCollideWith: " + target);
     }
 
     @Override
@@ -205,7 +182,7 @@ public class Tank extends Sprite
             aFire.setCentreX(this.getCentreX());
             aFire.setCentreY(this.getY() + aFire.getHeight() / 2);
             this.theScene.addSprite(aFire);
-            
+
         } else if (this.theDirection == DIRECTION.BOTTOM)
         {
             Fire aFire = new Fire();
@@ -225,7 +202,7 @@ public class Tank extends Sprite
             aFire.setCentreY(this.getCentreY());
             this.theScene.addSprite(aFire);
         }
-        
+
         Missile aMissile = this.getAMissile();
         this.theScene.addSprite(aMissile);
 
@@ -251,12 +228,12 @@ public class Tank extends Sprite
             aMissile.setVelocityX(this.getMissileVelocity());
         }
     }
-    
+
     Missile getAMissile()
     {
         return null;
     }
-    
+
     double getMissileVelocity()
     {
         return 0;

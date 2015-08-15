@@ -9,6 +9,7 @@ import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.ExpodeParticle;
+import au.com.rmit.tankbattle.sprites.basic.MovingObject;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import static java.lang.Math.abs;
@@ -18,18 +19,16 @@ import static java.lang.Math.pow;
  *
  * @author ricolwang
  */
-public class Missile extends Sprite
+public class Missile extends MovingObject
 {
 
     public Missile()
     {
+        super();
+        
         this.setWidth(10);
         this.setHeight(10);
         this.bCustomDrawing = true;
-        this.bCollisionArbitrary = true;
-
-//        RectangleShape aRectangleShape = new RectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-//        this.setTheShape(aRectangleShape);
     }
 
     @Override
@@ -46,7 +45,6 @@ public class Missile extends Sprite
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
 
-        System.out.println("Missile.onCollideWith: " + target);
         this.explode();
         this.setShouldDie();
     }

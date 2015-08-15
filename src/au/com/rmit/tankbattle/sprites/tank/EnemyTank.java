@@ -30,6 +30,10 @@ public class EnemyTank extends Tank implements ActionListener
         theTimerAdjust.start();
         theTimerForFire.start();
         this.theDirection = DIRECTION.BOTTOM;
+
+        this.setCollisionCategory(Common.CATEGORY_ENEMY_TANK);
+        this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
     }
 
     @Override
