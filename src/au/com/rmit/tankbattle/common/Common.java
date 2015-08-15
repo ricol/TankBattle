@@ -17,18 +17,19 @@ public class Common
     public static final float SPEED_MISSILE_FRIEND = 500;
     public static final float SPEED_MISSILE_ENEMY = 400;
 
-    public static final float SPEED_ENEMY_SHIP_X = 10;
-    public static final float SPEED_ENEMY_SHIP_CHANGE_X = 5;
-    public static final float SPEED_ENEMY_SHIP_Y = 100;
-    public static final float SPEED_ENEMY_SHIP_CHANGE_Y = 20;
+    public static final float SPEED_ENEMY_TANK = 200;
+    public static final float SPEED_FRIEND_TANK = 200;
 
     public static final int CATEGORY_FRIEND_SHIP = 1;
     public static final int CATEGORY_ENEMY_SHIP = 2;
     public static final int CATEGORY_MISSILE = 4;
+    public static final int CATEGORY_WALL = 5;
 
     public static final int SCORE_ENEMY = 5;
 
     public static final int LAYER_FRIEND_SHIP = 1;
     public static final int LAYER_ENEMY_SHIP = 0;
     public static final int LAYER_TEXT = 2;
+    
+    public static final int MAX_ENEMY = 10;
 }
