@@ -19,8 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -50,32 +48,6 @@ public class TankBattleScene extends WallScene
     public TankBattleScene()
     {
         this.enableCollisionDetect();
-
-        new Thread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                try
-                {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex)
-                {
-                    Logger.getLogger(TankBattleScene.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        gameStart();
-                    }
-                });
-            }
-        }
-        ).start();
-
     }
 
     public void addAEnemy()
@@ -110,44 +82,54 @@ public class TankBattleScene extends WallScene
         int tmpWidth = 150;
         int tmpHeight = 20;
 
-        lblMyLife = new LabelSprite(0, 0, "My Life: " + this.mylife, null);
+        if (lblMyLife == null)
+        {
+            lblMyLife = new LabelSprite(0, 0, "My Life: " + this.mylife, null);
 
-        lblMyLife.setWidth(tmpWidth);
+            lblMyLife.setWidth(tmpWidth);
 
-        lblMyLife.setHeight(tmpHeight);
+            lblMyLife.setHeight(tmpHeight);
 
-        lblMyLife.setRed(
-            255);
-        lblMyLife.bTextFrame = false;
-        lblMyLife.setLayer(Common.LAYER_TEXT);
+            lblMyLife.setRed(
+                255);
+            lblMyLife.bTextFrame = false;
+            lblMyLife.setLayer(Common.LAYER_TEXT);
 
-        addSprite(lblMyLife);
+            addSprite(lblMyLife);
+        }
 
-        lblEnemyKilled = new LabelSprite(0, 0, "Enemy Killed: " + this.enemyKilled, null);
+        if (lblEnemyKilled == null)
+        {
+            lblEnemyKilled = new LabelSprite(0, 0, "Enemy Killed: " + this.enemyKilled, null);
 
-        lblEnemyKilled.setWidth(tmpWidth);
+            lblEnemyKilled.setWidth(tmpWidth);
 
-        lblEnemyKilled.setHeight(tmpHeight);
+            lblEnemyKilled.setHeight(tmpHeight);
 
-        lblEnemyKilled.setRed(
-            255);
-        lblEnemyKilled.bTextFrame = false;
-        lblEnemyKilled.setLayer(Common.LAYER_TEXT);
+            lblEnemyKilled.setRed(
+                255);
+            lblEnemyKilled.bTextFrame = false;
+            lblEnemyKilled.setLayer(Common.LAYER_TEXT);
 
-        addSprite(lblEnemyKilled);
+            addSprite(lblEnemyKilled);
+        }
 
-        lblScore = new LabelSprite(0, 0, "Score: " + this.score, null);
+        if (lblScore == null)
+        {
 
-        lblScore.setWidth(tmpWidth);
+            lblScore = new LabelSprite(0, 0, "Score: " + this.score, null);
 
-        lblScore.setHeight(tmpHeight);
+            lblScore.setWidth(tmpWidth);
 
-        lblScore.setRed(
-            255);
-        lblScore.bTextFrame = false;
-        lblScore.setLayer(Common.LAYER_TEXT);
+            lblScore.setHeight(tmpHeight);
 
-        addSprite(lblScore);
+            lblScore.setRed(
+                255);
+            lblScore.bTextFrame = false;
+            lblScore.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblScore);
+        }
         this.adjustLabelPos();
     }
 
@@ -271,6 +253,8 @@ public class TankBattleScene extends WallScene
 
         addSprite(theFriendTank);
 
+        addLabels();
+        
         bGameRunning = true;
 
         new Thread(new Runnable()
@@ -292,7 +276,6 @@ public class TankBattleScene extends WallScene
                     public void run()
                     {
                         timerForEnemy.start();
-                        addLabels();
                     }
                 });
 
@@ -367,9 +350,13 @@ public class TankBattleScene extends WallScene
 
     public void keyPressed(KeyEvent e)
     {
-        System.out.println(e.getKeyChar());
-
-        if (this.bGameRunning)
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            if (this.bGameRunning)
+                this.gameEnd();
+            else
+                this.gameStart();
+        } else if (this.bGameRunning)
         {
             if (e.getKeyChar() == 'a')
             {

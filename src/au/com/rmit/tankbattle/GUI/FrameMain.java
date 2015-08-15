@@ -110,7 +110,7 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
             {
                 try
                 {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException ex)
                 {
                 }

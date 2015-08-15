@@ -5,6 +5,7 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
+import au.com.rmit.tankbattle.scene.TankBattleScene;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -44,5 +45,13 @@ public class EnemyTank extends Tank implements ActionListener
             this.movingTop();
         else
             this.movingBottom();
+    }
+
+    @Override
+    public void onDead()
+    {
+        ((TankBattleScene) this.theScene).deleteAEnemy(this);
+
+        super.onDead();
     }
 }
