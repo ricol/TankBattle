@@ -17,12 +17,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -30,7 +26,7 @@ import javax.swing.Timer;
  * @author ricolwang
  */
 public class TankBattleScene extends WallScene
-    implements ActionListener, KeyListener
+    implements ActionListener
 {
 
     public boolean bGameRunning;
@@ -51,35 +47,6 @@ public class TankBattleScene extends WallScene
     public TankBattleScene()
     {
         this.enableCollisionDetect();
-
-        new Thread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                try
-                {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex)
-                {
-                    Logger.getLogger(TankBattleScene.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        gameStart();
-                    }
-                });
-            }
-        }
-        ).start();
-
-        this.addKeyListener(this);
-        this.setFocusable(true);
-        this.requestFocus();
     }
 
     public void addAEnemy()
@@ -101,9 +68,9 @@ public class TankBattleScene extends WallScene
         aEnemy.setCentreY(aEnemy.getHeight());
 
         if (theRandom.nextBoolean())
-            aEnemy.setVelocityY(Common.SPEED_ENEMY_TANK);
+            aEnemy.movingBottom();
         else
-            aEnemy.setVelocityX(Common.SPEED_ENEMY_TANK);
+            aEnemy.movingRight();
 
         this.addSprite(aEnemy);
         this.addAEnemy(aEnemy);
@@ -114,48 +81,58 @@ public class TankBattleScene extends WallScene
         int tmpWidth = 150;
         int tmpHeight = 20;
 
-        lblMyLife = new LabelSprite(0, 0, "My Life: " + this.mylife, null);
+        if (lblMyLife == null)
+        {
+            lblMyLife = new LabelSprite(0, 0, "My Life: " + this.mylife, null);
 
-        lblMyLife.setWidth(tmpWidth);
+            lblMyLife.setWidth(tmpWidth);
 
-        lblMyLife.setHeight(tmpHeight);
+            lblMyLife.setHeight(tmpHeight);
 
-        lblMyLife.setRed(
-            255);
-        lblMyLife.bTextFrame = false;
-        lblMyLife.setLayer(Common.LAYER_TEXT);
+            lblMyLife.setRed(
+                255);
+            lblMyLife.bTextFrame = false;
+            lblMyLife.setLayer(Common.LAYER_TEXT);
 
-        addSprite(lblMyLife);
+            addSprite(lblMyLife);
+        }
 
-        lblEnemyKilled = new LabelSprite(0, 0, "Enemy Killed: " + this.enemyKilled, null);
+        if (lblEnemyKilled == null)
+        {
+            lblEnemyKilled = new LabelSprite(0, 0, "Enemy Killed: " + this.enemyKilled, null);
 
-        lblEnemyKilled.setWidth(tmpWidth);
+            lblEnemyKilled.setWidth(tmpWidth);
 
-        lblEnemyKilled.setHeight(tmpHeight);
+            lblEnemyKilled.setHeight(tmpHeight);
 
-        lblEnemyKilled.setRed(
-            255);
-        lblEnemyKilled.bTextFrame = false;
-        lblEnemyKilled.setLayer(Common.LAYER_TEXT);
+            lblEnemyKilled.setRed(
+                255);
+            lblEnemyKilled.bTextFrame = false;
+            lblEnemyKilled.setLayer(Common.LAYER_TEXT);
 
-        addSprite(lblEnemyKilled);
+            addSprite(lblEnemyKilled);
+        }
 
-        lblScore = new LabelSprite(0, 0, "Score: " + this.score, null);
+        if (lblScore == null)
+        {
 
-        lblScore.setWidth(tmpWidth);
+            lblScore = new LabelSprite(0, 0, "Score: " + this.score, null);
 
-        lblScore.setHeight(tmpHeight);
+            lblScore.setWidth(tmpWidth);
 
-        lblScore.setRed(
-            255);
-        lblScore.bTextFrame = false;
-        lblScore.setLayer(Common.LAYER_TEXT);
+            lblScore.setHeight(tmpHeight);
 
-        addSprite(lblScore);
+            lblScore.setRed(
+                255);
+            lblScore.bTextFrame = false;
+            lblScore.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblScore);
+        }
         this.adjustLabelPos();
     }
 
-    void adjustLabelPos()
+    public void adjustLabelPos()
     {
         int tmpY = 20;
         int tmpMarginRight = 140;
@@ -275,35 +252,11 @@ public class TankBattleScene extends WallScene
 
         addSprite(theFriendTank);
 
+        addLabels();
+
+        timerForEnemy.start();
+
         bGameRunning = true;
-
-        new Thread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                try
-                {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex)
-                {
-                }
-
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        timerForEnemy.start();
-                        addLabels();
-                    }
-                });
-
-            }
-
-        }).start();
-
     }
 
     public void gameEnd()
@@ -351,35 +304,15 @@ public class TankBattleScene extends WallScene
         this.bGameRunning = false;
     }
 
-    public void gamePause()
-    {
-        LabelSprite aLabel = new LabelSprite("Game Pause", new Font("TimesRoman", Font.PLAIN, 20));
-        aLabel.setWidth(100);
-        aLabel.setHeight(20);
-        aLabel.bTextFrame = false;
-        aLabel.bDeadIfNoActions = true;
-        aLabel.setCentreX(this.getWidth() / 2);
-        aLabel.setCentreY(this.getHeight() / 2);
-
-        AlphaToAction aAction = new AlphaToAction(aLabel);
-        aAction.alphaTo(0, 1.5f);
-        aLabel.addAction(aAction);
-
-        this.addSprite(aLabel);
-        this.bGameRunning = false;
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-    }
-
-    @Override
     public void keyPressed(KeyEvent e)
     {
-        System.out.println(e.getKeyChar());
-        
-        if (this.bGameRunning)
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            if (this.bGameRunning)
+                this.gameEnd();
+            else
+                this.gameStart();
+        } else if (this.bGameRunning)
         {
             if (e.getKeyChar() == 'a')
             {
@@ -392,10 +325,13 @@ public class TankBattleScene extends WallScene
                 theFriendTank.movingTop();
             } else if (e.getKeyChar() == 's')
                 theFriendTank.movingBottom();
+            else if (e.getKeyChar() == KeyEvent.VK_SPACE)
+            {
+                theFriendTank.fire();
+            }
         }
     }
 
-    @Override
     public void keyReleased(KeyEvent e)
     {
         if (this.bGameRunning)
@@ -404,5 +340,5 @@ public class TankBattleScene extends WallScene
             theFriendTank.setVelocityY(0);
         }
     }
-    
+
 }

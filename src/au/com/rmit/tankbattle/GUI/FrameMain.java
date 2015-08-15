@@ -2,6 +2,8 @@ package au.com.rmit.tankbattle.GUI;
 
 import au.com.rmit.Game2dEngine.director.Director;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.SwingUtilities;
@@ -15,10 +17,11 @@ import javax.swing.SwingUtilities;
  *
  * @author ricolwang
  */
-public class FrameMain extends javax.swing.JFrame
+public class FrameMain extends javax.swing.JFrame implements KeyListener
 
 {
 
+    TankBattleScene theScene;
     boolean bAlreadyRun;
     MouseEvent mouseEvent;
     Random theRandom = new Random();
@@ -26,8 +29,8 @@ public class FrameMain extends javax.swing.JFrame
     public FrameMain()
     {
         initComponents();
-        this.panelGame.setFocusable(true);
-        this.panelGame.requestFocus();
+
+        this.addKeyListener(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +41,13 @@ public class FrameMain extends javax.swing.JFrame
         panelGame = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentResized(java.awt.event.ComponentEvent evt)
+            {
+                formComponentResized(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowOpened(java.awt.event.WindowEvent evt)
@@ -107,7 +117,7 @@ public class FrameMain extends javax.swing.JFrame
             {
                 try
                 {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                 } catch (InterruptedException ex)
                 {
                 }
@@ -116,11 +126,8 @@ public class FrameMain extends javax.swing.JFrame
                 {
                     public void run()
                     {
-                        Director.getSharedInstance().showScene(new TankBattleScene());
-                        panelGame.setFocusable(true);
-                        panelGame.requestFocus();
-                        panelGame.requestFocus(true);
-                        panelGame.requestFocusInWindow();
+                        theScene = new TankBattleScene();
+                        Director.getSharedInstance().showScene(theScene);
                     }
                 });
 
@@ -129,8 +136,33 @@ public class FrameMain extends javax.swing.JFrame
         }).start();
     }//GEN-LAST:event_formWindowActivated
 
+    private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
+    {//GEN-HEADEREND:event_formComponentResized
+        if (theScene != null)
+            theScene.adjustLabelPos();
+    }//GEN-LAST:event_formComponentResized
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelGame;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        if (this.theScene != null)
+            this.theScene.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        if (this.theScene != null)
+            this.theScene.keyReleased(e);
+    }
 
 }
