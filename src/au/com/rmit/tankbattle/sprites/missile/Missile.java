@@ -10,6 +10,7 @@ import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.ExpodeParticle;
 import au.com.rmit.tankbattle.sprites.basic.MovingObject;
+import au.com.rmit.tankbattle.sprites.tank.Tank;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import static java.lang.Math.abs;
@@ -22,10 +23,14 @@ import static java.lang.Math.pow;
 public class Missile extends MovingObject
 {
 
-    public Missile()
+    Tank theTank;
+
+    public Missile(Tank theTank)
     {
         super();
         
+        this.theTank = theTank;
+
         this.setWidth(10);
         this.setHeight(10);
         this.bCustomDrawing = true;
@@ -49,6 +54,13 @@ public class Missile extends MovingObject
         this.setShouldDie();
     }
 
+    @Override
+    public void onDead()
+    {
+        this.theTank.clearMissile();
+        super.onDead(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     protected void explode()
     {
         int number = abs(theRandom.nextInt()) % 10 + 10;

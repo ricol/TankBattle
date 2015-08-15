@@ -48,7 +48,7 @@ public class FriendTank extends Tank
     @Override
     Missile getAMissile()
     {
-        return new FriendMissile();
+        return new FriendMissile(this);
     }
 
     @Override

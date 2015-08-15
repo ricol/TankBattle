@@ -73,7 +73,7 @@ public class EnemyTank extends Tank implements ActionListener
     @Override
     Missile getAMissile()
     {
-        return new EnemyMissile();
+        return new EnemyMissile(this);
     }
 
     @Override

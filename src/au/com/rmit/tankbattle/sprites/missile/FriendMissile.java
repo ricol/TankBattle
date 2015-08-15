@@ -6,6 +6,7 @@
 package au.com.rmit.tankbattle.sprites.missile;
 
 import au.com.rmit.tankbattle.common.Common;
+import au.com.rmit.tankbattle.sprites.tank.Tank;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -16,9 +17,9 @@ import java.awt.Graphics2D;
 public class FriendMissile extends Missile
 {
 
-    public FriendMissile()
+    public FriendMissile(Tank theTank)
     {
-        super();
+        super(theTank);
         
         this.setCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);

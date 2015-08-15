@@ -132,7 +132,7 @@ public class TankBattleScene extends WallScene
         this.adjustLabelPos();
     }
 
-    void adjustLabelPos()
+    public void adjustLabelPos()
     {
         int tmpY = 20;
         int tmpMarginRight = 140;

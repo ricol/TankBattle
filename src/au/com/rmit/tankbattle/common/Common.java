@@ -27,9 +27,9 @@ public class Common
     
     public static final int MAX_ENEMY = 10;
     
-    public static final int CATEGORY_WALL = 0;
-    public static final int CATEGORY_FRIEND_TANK = 1;
-    public static final int CATEGORY_ENEMY_TANK = 2;
-    public static final int CATEGORY_FRIEND_MISSILE = 3;
-    public static final int CATEGORY_ENEMY_MISSILE = 4;
+    public static final int CATEGORY_WALL = 1;
+    public static final int CATEGORY_FRIEND_TANK = 2;
+    public static final int CATEGORY_ENEMY_TANK = 3;
+    public static final int CATEGORY_FRIEND_MISSILE = 4;
+    public static final int CATEGORY_ENEMY_MISSILE = 5;
 }
