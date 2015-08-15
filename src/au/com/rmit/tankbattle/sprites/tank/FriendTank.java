@@ -11,10 +11,8 @@ package au.com.rmit.tankbattle.sprites.tank;
  */
 public class FriendTank extends Tank
 {
-
     public FriendTank()
     {
-        super("Resource/FriendTank.png");
+        super("resource/Friend.png");
     }
-
 }

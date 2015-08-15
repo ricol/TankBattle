@@ -7,7 +7,6 @@ package au.com.rmit.tankbattle.scene;
 
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
-import au.com.rmit.Game2dEngine.scene.Scene;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
 import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.Score;
@@ -17,9 +16,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import static java.lang.Math.abs;
-import static java.lang.Math.pow;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -27,8 +29,8 @@ import javax.swing.Timer;
  *
  * @author ricolwang
  */
-public class TankBattleScene extends Scene
-    implements ActionListener
+public class TankBattleScene extends WallScene
+    implements ActionListener, KeyListener
 {
 
     public boolean bGameRunning;
@@ -42,42 +44,66 @@ public class TankBattleScene extends Scene
 
     FriendTank theFriendTank;
 
-    Timer timerForEnemy = new Timer(5000, this);
+    Timer timerForEnemy = new Timer(2000, this);
 
     ArrayList<EnemyTank> allEnemies = new ArrayList<>();
 
     public TankBattleScene()
     {
         this.enableCollisionDetect();
+
+        new Thread(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                try
+                {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex)
+                {
+                    Logger.getLogger(TankBattleScene.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    public void run()
+                    {
+                        gameStart();
+                    }
+                });
+            }
+        }
+        ).start();
+
+        this.addKeyListener(this);
+        this.setFocusable(true);
+        this.requestFocus();
     }
 
     public void addAEnemy()
     {
+        if (this.allEnemies.size() >= Common.MAX_ENEMY)
+            return;
+
         String[] data = new String[]
         {
             "Enemy.png"
         };
 
         int index = abs(theRandom.nextInt()) % data.length;
+
         EnemyTank aEnemy = new EnemyTank("Resource/" + data[index]);
 
-        boolean b = theRandom.nextBoolean();
-        index = b ? 1 : 0;
-        index = (int) pow(-1, index);
-        int size = (int) (this.getWidth() * (1 / 4.0));
+        int num = theRandom.nextInt() % 3;
+        aEnemy.setCentreX(((this.getWidth() - aEnemy.getWidth()) / 2.0) * num);
+        aEnemy.setCentreY(aEnemy.getHeight());
 
-        aEnemy.setX(this.getWidth() / 2 + index * abs(theRandom.nextInt()) % size);
-        aEnemy.setY(-100);
-
-        b = theRandom.nextBoolean();
-        index = b ? 1 : 0;
-        index = (int) pow(-1, index);
-
-        float velocityXTmp = index * abs(theRandom.nextInt()) % Common.SPEED_ENEMY_SHIP_CHANGE_X + Common.SPEED_ENEMY_SHIP_X;
-        float velocttyYTmp = abs(theRandom.nextInt()) % Common.SPEED_ENEMY_SHIP_CHANGE_Y + Common.SPEED_ENEMY_SHIP_Y;
-
-        aEnemy.setVelocityX(velocityXTmp);
-        aEnemy.setVelocityY(velocttyYTmp);
+        if (theRandom.nextBoolean())
+            aEnemy.setVelocityY(Common.SPEED_ENEMY_TANK);
+        else
+            aEnemy.setVelocityX(Common.SPEED_ENEMY_TANK);
 
         this.addSprite(aEnemy);
         this.addAEnemy(aEnemy);
@@ -219,6 +245,8 @@ public class TankBattleScene extends Scene
 
     public void gameStart()
     {
+        this.buildWalls();
+
         enemyKilled = 0;
         mylife = 3;
         score = 0;
@@ -340,4 +368,41 @@ public class TankBattleScene extends Scene
         this.addSprite(aLabel);
         this.bGameRunning = false;
     }
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        System.out.println(e.getKeyChar());
+        
+        if (this.bGameRunning)
+        {
+            if (e.getKeyChar() == 'a')
+            {
+                theFriendTank.movingLeft();
+            } else if (e.getKeyChar() == 'd')
+            {
+                theFriendTank.movingRight();
+            } else if (e.getKeyChar() == 'w')
+            {
+                theFriendTank.movingTop();
+            } else if (e.getKeyChar() == 's')
+                theFriendTank.movingBottom();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        if (this.bGameRunning)
+        {
+            theFriendTank.setVelocityX(0);
+            theFriendTank.setVelocityY(0);
+        }
+    }
+    
 }
