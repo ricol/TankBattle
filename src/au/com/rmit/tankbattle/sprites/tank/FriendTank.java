@@ -5,17 +5,22 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
+import au.com.rmit.tankbattle.common.Common;
+import au.com.rmit.tankbattle.sprites.missile.FriendMissile;
+import au.com.rmit.tankbattle.sprites.missile.Missile;
+
 /**
  *
  * @author ricolwang
  */
 public class FriendTank extends Tank
 {
+
     public FriendTank()
     {
         super("resource/Friend.png");
     }
-    
+
     @Override
     void adjustPosition()
     {
@@ -34,5 +39,17 @@ public class FriendTank extends Tank
             else if (v < 0)
                 this.setAngle(0);
         }
+    }
+
+    @Override
+    Missile getAMissile()
+    {
+        return new FriendMissile();
+    }
+
+    @Override
+    double getMissileVelocity()
+    {
+        return Common.SPEED_MISSILE_FRIEND;
     }
 }

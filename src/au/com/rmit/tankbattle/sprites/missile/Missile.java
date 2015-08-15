@@ -23,8 +23,13 @@ public class Missile extends Sprite
 
     public Missile()
     {
+        this.setWidth(10);
+        this.setHeight(10);
         this.bCustomDrawing = true;
         this.bCollisionArbitrary = true;
+
+//        RectangleShape aRectangleShape = new RectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+//        this.setTheShape(aRectangleShape);
     }
 
     @Override
@@ -40,14 +45,15 @@ public class Missile extends Sprite
     public void onCollideWith(Sprite target)
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
-        
+
+        System.out.println("Missile.onCollideWith: " + target);
         this.explode();
         this.setShouldDie();
     }
-    
+
     protected void explode()
     {
-        int number = abs(theRandom.nextInt()) % 10;
+        int number = abs(theRandom.nextInt()) % 10 + 10;
 
         for (int i = 0; i < number; i++)
         {
@@ -65,7 +71,7 @@ public class Missile extends Sprite
             aFire.bDeadIfNoActions = true;
 
             AlphaToAction aAction = new AlphaToAction(aFire);
-            aAction.alphaTo(0, 0.5f);
+            aAction.alphaTo(0, 0.1f);
             aFire.addAction(aAction);
 
             if (this.theScene == null)

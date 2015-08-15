@@ -5,7 +5,10 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
+import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
+import au.com.rmit.tankbattle.sprites.missile.EnemyMissile;
+import au.com.rmit.tankbattle.sprites.missile.Missile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -18,11 +21,15 @@ public class EnemyTank extends Tank implements ActionListener
 {
 
     Timer theTimerAdjust = new Timer(3000, this);
+    Timer theTimerForFire = new Timer(2000, this);
 
     public EnemyTank(String imagename)
     {
         super(imagename);
+
         theTimerAdjust.start();
+        theTimerForFire.start();
+        this.theDirection = DIRECTION.BOTTOM;
     }
 
     @Override
@@ -31,6 +38,10 @@ public class EnemyTank extends Tank implements ActionListener
         if (e.getSource().equals(this.theTimerAdjust))
         {
             this.changeDirection();
+        } else if (e.getSource().equals(this.theTimerForFire))
+        {
+            if (theRandom.nextBoolean())
+                this.fire();
         }
     }
 
@@ -53,5 +64,17 @@ public class EnemyTank extends Tank implements ActionListener
         ((TankBattleScene) this.theScene).deleteAEnemy(this);
 
         super.onDead();
+    }
+
+    @Override
+    Missile getAMissile()
+    {
+        return new EnemyMissile();
+    }
+
+    @Override
+    double getMissileVelocity()
+    {
+        return Common.SPEED_MISSILE_ENEMY;
     }
 }

@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -69,9 +68,9 @@ public class TankBattleScene extends WallScene
         aEnemy.setCentreY(aEnemy.getHeight());
 
         if (theRandom.nextBoolean())
-            aEnemy.setVelocityY(Common.SPEED_ENEMY_TANK);
+            aEnemy.movingBottom();
         else
-            aEnemy.setVelocityX(Common.SPEED_ENEMY_TANK);
+            aEnemy.movingRight();
 
         this.addSprite(aEnemy);
         this.addAEnemy(aEnemy);
@@ -254,35 +253,10 @@ public class TankBattleScene extends WallScene
         addSprite(theFriendTank);
 
         addLabels();
-        
+
+        timerForEnemy.start();
+
         bGameRunning = true;
-
-        new Thread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                try
-                {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex)
-                {
-                }
-
-                SwingUtilities.invokeLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        timerForEnemy.start();
-                    }
-                });
-
-            }
-
-        }).start();
-
     }
 
     public void gameEnd()
@@ -330,24 +304,6 @@ public class TankBattleScene extends WallScene
         this.bGameRunning = false;
     }
 
-    public void gamePause()
-    {
-        LabelSprite aLabel = new LabelSprite("Game Pause", new Font("TimesRoman", Font.PLAIN, 20));
-        aLabel.setWidth(100);
-        aLabel.setHeight(20);
-        aLabel.bTextFrame = false;
-        aLabel.bDeadIfNoActions = true;
-        aLabel.setCentreX(this.getWidth() / 2);
-        aLabel.setCentreY(this.getHeight() / 2);
-
-        AlphaToAction aAction = new AlphaToAction(aLabel);
-        aAction.alphaTo(0, 1.5f);
-        aLabel.addAction(aAction);
-
-        this.addSprite(aLabel);
-        this.bGameRunning = false;
-    }
-
     public void keyPressed(KeyEvent e)
     {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
@@ -369,6 +325,10 @@ public class TankBattleScene extends WallScene
                 theFriendTank.movingTop();
             } else if (e.getKeyChar() == 's')
                 theFriendTank.movingBottom();
+            else if (e.getKeyChar() == KeyEvent.VK_SPACE)
+            {
+                theFriendTank.fire();
+            }
         }
     }
 
