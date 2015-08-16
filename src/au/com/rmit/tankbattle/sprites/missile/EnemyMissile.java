@@ -34,9 +34,9 @@ public class EnemyMissile extends Missile
         theGraphics2D.setColor(Color.BLUE);
         theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
     }
-    
+
     @Override
-    Color getExplosionColor()
+    protected Color getExplosionColor()
     {
         return Color.blue;
     }

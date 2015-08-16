@@ -5,19 +5,14 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
-import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.geometry.shape.RectangleShape;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
-import au.com.rmit.tankbattle.common.Common;
-import au.com.rmit.tankbattle.other.ExpodeParticle;
 import au.com.rmit.tankbattle.other.Fire;
 import au.com.rmit.tankbattle.other.Wall;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
 import au.com.rmit.tankbattle.sprites.basic.MovingObject;
 import au.com.rmit.tankbattle.sprites.missile.Missile;
 import au.com.rmit.tankbattle.sprites.tank.Tank.DIRECTION;
-import static java.lang.Math.abs;
-import static java.lang.Math.pow;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +49,8 @@ public class Tank extends MovingObject
         if (target instanceof Missile)
         {
             this.life -= 10;
-            if (this.life <= 0) this.setShouldDie();
+            if (this.life <= 0)
+                this.setShouldDie();
         }
     }
 
@@ -70,8 +66,8 @@ public class Tank extends MovingObject
     @Override
     public void onDead()
     {
-        this.explode();
-        
+        this.explode(50);
+
         super.onDead(); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -258,7 +254,7 @@ public class Tank extends MovingObject
     {
         return null;
     }
-    
+
     double getTankSpeed()
     {
         return 0;
@@ -273,19 +269,23 @@ public class Tank extends MovingObject
     {
         this.theMissile = null;
     }
-    
+
     public void changeMovingDirection(Tank.DIRECTION theOldDirection)
     {
         Tank.DIRECTION newDirection = theOldDirection;
         while (newDirection == theOldDirection)
         {
             int num = theRandom.nextInt() % 4;
-            if (num == 0) newDirection = DIRECTION.TOP;
-            else if (num == 1) newDirection = DIRECTION.BOTTOM;
-            else if (num == 2) newDirection = DIRECTION.LEFT;
-            else newDirection = DIRECTION.RIGHT;
+            if (num == 0)
+                newDirection = DIRECTION.TOP;
+            else if (num == 1)
+                newDirection = DIRECTION.BOTTOM;
+            else if (num == 2)
+                newDirection = DIRECTION.LEFT;
+            else
+                newDirection = DIRECTION.RIGHT;
         }
-        
+
         if (newDirection == DIRECTION.TOP)
             this.movingTop();
         else if (newDirection == DIRECTION.BOTTOM)
@@ -294,36 +294,5 @@ public class Tank extends MovingObject
             this.movingLeft();
         else
             this.movingRight();
-    }
-    
-    protected void explode()
-    {
-        int number = abs(theRandom.nextInt()) % 10 + 50;
-
-        for (int i = 0; i < number; i++)
-        {
-            double tmpX = pow(-1, theRandom.nextInt() % 10) * theRandom.nextFloat() * Common.SPEED_EXPLODE_PARTICLE;
-            double tmpY = pow(-1, theRandom.nextInt() % 10) * theRandom.nextFloat() * Common.SPEED_EXPLODE_PARTICLE;
-
-            ExpodeParticle aFire = new ExpodeParticle();
-            aFire.setX(this.getCentreX());
-            aFire.setY(this.getCentreY());
-            aFire.setVelocityX(tmpX);
-            aFire.setVelocityY(tmpY);
-            aFire.setRed(255);
-            aFire.setGreen(255);
-            aFire.setBlue(255);
-            aFire.bDeadIfNoActions = true;
-
-            AlphaToAction aAction = new AlphaToAction(aFire);
-            aAction.alphaTo(0, 0.1f);
-            aFire.addAction(aAction);
-
-            if (this.theScene == null)
-            {
-                break;
-            }
-            this.theScene.addSprite(aFire);
-        }
     }
 }
