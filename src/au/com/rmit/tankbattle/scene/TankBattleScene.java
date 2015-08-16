@@ -7,11 +7,16 @@ package au.com.rmit.tankbattle.scene;
 
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
+import au.com.rmit.Game2dEngine.geometry.shape.ClosureShape;
+import au.com.rmit.Game2dEngine.geometry.shape.RectangleShape;
+import au.com.rmit.Game2dEngine.geometry.shape.Shape;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
+import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.Score;
 import au.com.rmit.tankbattle.sprites.tank.EnemyTank;
 import au.com.rmit.tankbattle.sprites.tank.FriendTank;
+import au.com.rmit.tankbattle.sprites.tank.Tank;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -51,6 +56,34 @@ public class TankBattleScene extends WallScene
 
     public void addAEnemy()
     {
+        int num = theRandom.nextInt() % 3;
+        double width = 50;
+        RectangleShape aRectangle = new RectangleShape(((this.getWidth() - width - 2 * this.theWallLeft.getWidth() - 10) / 2.0) * num, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
+
+        boolean bCollide = false;
+
+        for (Sprite aSprite : this.getAllSprites())
+        {
+            if (aSprite instanceof Tank)
+            {
+                Tank aTank = (Tank) aSprite;
+
+                Shape theShape = aTank.getTheShape();
+                if (theShape instanceof ClosureShape)
+                {
+                    ClosureShape aClosureShape = (ClosureShape) theShape;
+                    if (aClosureShape.collideWith(aRectangle))
+                    {
+                        bCollide = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (bCollide)
+            return;
+
         if (this.allEnemies.size() >= Common.MAX_ENEMY)
             return;
 
@@ -62,10 +95,8 @@ public class TankBattleScene extends WallScene
         int index = abs(theRandom.nextInt()) % data.length;
 
         EnemyTank aEnemy = new EnemyTank("Resource/" + data[index]);
-
-        int num = theRandom.nextInt() % 3;
-        aEnemy.setCentreX(((this.getWidth() - aEnemy.getWidth()) / 2.0) * num);
-        aEnemy.setCentreY(aEnemy.getHeight());
+        aEnemy.setX(aRectangle.left);
+        aEnemy.setY(aRectangle.top);
 
         if (theRandom.nextBoolean())
             aEnemy.movingBottom();

@@ -5,15 +5,19 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
+import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.geometry.shape.RectangleShape;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
+import au.com.rmit.tankbattle.other.ExpodeParticle;
 import au.com.rmit.tankbattle.other.Fire;
 import au.com.rmit.tankbattle.other.Wall;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
 import au.com.rmit.tankbattle.sprites.basic.MovingObject;
 import au.com.rmit.tankbattle.sprites.missile.Missile;
 import au.com.rmit.tankbattle.sprites.tank.Tank.DIRECTION;
+import static java.lang.Math.abs;
+import static java.lang.Math.pow;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +26,9 @@ import java.util.ArrayList;
  */
 public class Tank extends MovingObject
 {
+
     Missile theMissile;
+    protected int life = 100;
 
     public static enum DIRECTION
     {
@@ -45,6 +51,11 @@ public class Tank extends MovingObject
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
 
+        if (target instanceof Missile)
+        {
+            this.life -= 10;
+            if (this.life <= 0) this.setShouldDie();
+        }
     }
 
     @Override
@@ -56,7 +67,15 @@ public class Tank extends MovingObject
         this.checkTank();
     }
 
-    void checkWall()
+    @Override
+    public void onDead()
+    {
+        this.explode();
+        
+        super.onDead(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void checkWall()
     {
         if (this.theScene == null)
             return;
@@ -78,7 +97,7 @@ public class Tank extends MovingObject
             this.setX(this.getX() - 1);
     }
 
-    void checkTank()
+    private void checkTank()
     {
         if (this.theScene == null)
             return;
@@ -96,7 +115,7 @@ public class Tank extends MovingObject
         }
     }
 
-    void checkTank(Tank aTank)
+    private void checkTank(Tank aTank)
     {
         if (aTank.equals(this))
             return;
@@ -108,9 +127,6 @@ public class Tank extends MovingObject
         {
             this.restoreX();
             this.restoreY();
-
-            aTank.restoreX();
-            aTank.restoreY();
         }
     }
 
@@ -149,7 +165,7 @@ public class Tank extends MovingObject
 
     public void movingLeft()
     {
-        this.setVelocityX(-Common.SPEED_FRIEND_TANK);
+        this.setVelocityX(-this.getTankSpeed());
         this.setVelocityY(0);
         this.theDirection = DIRECTION.LEFT;
     }
@@ -157,30 +173,32 @@ public class Tank extends MovingObject
     public void movingTop()
     {
         this.setVelocityX(0);
-        this.setVelocityY(-Common.SPEED_FRIEND_TANK);
+        this.setVelocityY(-this.getTankSpeed());
         this.theDirection = DIRECTION.TOP;
     }
 
     public void movingBottom()
     {
         this.setVelocityX(0);
-        this.setVelocityY(Common.SPEED_FRIEND_TANK);
+        this.setVelocityY(this.getTankSpeed());
         this.theDirection = DIRECTION.BOTTOM;
     }
 
     public void movingRight()
     {
-        this.setVelocityX(Common.SPEED_FRIEND_TANK);
+        this.setVelocityX(this.getTankSpeed());
         this.setVelocityY(0);
         this.theDirection = DIRECTION.RIGHT;
     }
 
     public void fire()
     {
-        if (this.theMissile != null) return;
-        
-        if (this.theScene == null) return;
-        
+        if (this.theMissile != null)
+            return;
+
+        if (this.theScene == null)
+            return;
+
         if (this.theDirection == DIRECTION.TOP)
         {
             Fire aFire = new Fire();
@@ -232,7 +250,7 @@ public class Tank extends MovingObject
             aMissile.setCentreY(this.getCentreY());
             aMissile.setVelocityX(this.getMissileVelocity());
         }
-        
+
         this.theMissile = aMissile;
     }
 
@@ -240,14 +258,72 @@ public class Tank extends MovingObject
     {
         return null;
     }
+    
+    double getTankSpeed()
+    {
+        return 0;
+    }
 
     double getMissileVelocity()
     {
         return 0;
     }
-    
+
     public void clearMissile()
     {
         this.theMissile = null;
+    }
+    
+    public void changeMovingDirection(Tank.DIRECTION theOldDirection)
+    {
+        Tank.DIRECTION newDirection = theOldDirection;
+        while (newDirection == theOldDirection)
+        {
+            int num = theRandom.nextInt() % 4;
+            if (num == 0) newDirection = DIRECTION.TOP;
+            else if (num == 1) newDirection = DIRECTION.BOTTOM;
+            else if (num == 2) newDirection = DIRECTION.LEFT;
+            else newDirection = DIRECTION.RIGHT;
+        }
+        
+        if (newDirection == DIRECTION.TOP)
+            this.movingTop();
+        else if (newDirection == DIRECTION.BOTTOM)
+            this.movingBottom();
+        else if (newDirection == DIRECTION.LEFT)
+            this.movingLeft();
+        else
+            this.movingRight();
+    }
+    
+    protected void explode()
+    {
+        int number = abs(theRandom.nextInt()) % 10 + 50;
+
+        for (int i = 0; i < number; i++)
+        {
+            double tmpX = pow(-1, theRandom.nextInt() % 10) * theRandom.nextFloat() * Common.SPEED_EXPLODE_PARTICLE;
+            double tmpY = pow(-1, theRandom.nextInt() % 10) * theRandom.nextFloat() * Common.SPEED_EXPLODE_PARTICLE;
+
+            ExpodeParticle aFire = new ExpodeParticle();
+            aFire.setX(this.getCentreX());
+            aFire.setY(this.getCentreY());
+            aFire.setVelocityX(tmpX);
+            aFire.setVelocityY(tmpY);
+            aFire.setRed(255);
+            aFire.setGreen(255);
+            aFire.setBlue(255);
+            aFire.bDeadIfNoActions = true;
+
+            AlphaToAction aAction = new AlphaToAction(aFire);
+            aAction.alphaTo(0, 0.1f);
+            aFire.addAction(aAction);
+
+            if (this.theScene == null)
+            {
+                break;
+            }
+            this.theScene.addSprite(aFire);
+        }
     }
 }
