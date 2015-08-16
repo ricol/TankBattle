@@ -198,6 +198,9 @@ public class TankBattleScene extends WallScene
 
     public void killAEnemy(EnemyTank aEnemy)
     {
+        if (!this.bGameRunning)
+            return;
+
         Score aScore = new Score("+" + Common.SCORE_ENEMY);
         aScore.setCentreX(aEnemy.getCentreX());
         aScore.setCentreY(aEnemy.getCentreY());
@@ -299,8 +302,6 @@ public class TankBattleScene extends WallScene
             AlphaByAction aAction = new AlphaByAction();
             aAction.alphaBy(-1, 1);
             theFriendTank.addAction(aAction);
-
-            theFriendTank.setVelocityY(-500);
             theFriendTank.bDeadIfNoActions = true;
         }
 

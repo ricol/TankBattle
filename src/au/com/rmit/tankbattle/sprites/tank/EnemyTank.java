@@ -69,11 +69,11 @@ public class EnemyTank extends Tank implements ActionListener
     public void onWillDead()
     {
         super.onWillDead(); //To change body of generated methods, choose Tools | Templates.
-        
+
         ((TankBattleScene) this.theScene).deleteAEnemy(this);
         ((TankBattleScene) this.theScene).killAEnemy(this);
     }
-    
+
     @Override
     Missile getAMissile()
     {

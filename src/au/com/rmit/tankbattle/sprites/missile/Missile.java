@@ -5,16 +5,11 @@
  */
 package au.com.rmit.tankbattle.sprites.missile;
 
-import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
-import au.com.rmit.tankbattle.common.Common;
-import au.com.rmit.tankbattle.other.ExpodeParticle;
 import au.com.rmit.tankbattle.sprites.basic.MovingObject;
 import au.com.rmit.tankbattle.sprites.tank.Tank;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import static java.lang.Math.abs;
-import static java.lang.Math.pow;
 
 /**
  *
@@ -50,7 +45,7 @@ public class Missile extends MovingObject
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
 
-        this.explode();
+        this.explode(20);
         this.setShouldDie();
     }
 
@@ -59,42 +54,5 @@ public class Missile extends MovingObject
     {
         this.theTank.clearMissile();
         super.onDead(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    protected void explode()
-    {
-        int number = abs(theRandom.nextInt()) % 10 + 10;
-
-        for (int i = 0; i < number; i++)
-        {
-            double tmpX = pow(-1, theRandom.nextInt() % 10) * theRandom.nextFloat() * Common.SPEED_EXPLODE_PARTICLE;
-            double tmpY = pow(-1, theRandom.nextInt() % 10) * theRandom.nextFloat() * Common.SPEED_EXPLODE_PARTICLE;
-
-            ExpodeParticle aFire = new ExpodeParticle();
-            aFire.setX(this.getCentreX());
-            aFire.setY(this.getCentreY());
-            aFire.setVelocityX(tmpX);
-            aFire.setVelocityY(tmpY);
-            Color theColor = this.getExplosionColor();
-            aFire.setRed(theColor.getRed());
-            aFire.setGreen(theColor.getGreen());
-            aFire.setBlue(theColor.getBlue());
-            aFire.bDeadIfNoActions = true;
-
-            AlphaToAction aAction = new AlphaToAction(aFire);
-            aAction.alphaTo(0, 0.1f);
-            aFire.addAction(aAction);
-
-            if (this.theScene == null)
-            {
-                break;
-            }
-            this.theScene.addSprite(aFire);
-        }
-    }
-    
-    Color getExplosionColor()
-    {
-        return Color.white;
     }
 }
