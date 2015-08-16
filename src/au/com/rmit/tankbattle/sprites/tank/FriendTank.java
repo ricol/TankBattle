@@ -56,4 +56,10 @@ public class FriendTank extends Tank
     {
         return Common.SPEED_MISSILE_FRIEND;
     }
+
+    @Override
+    double getTankSpeed()
+    {
+        return Common.SPEED_FRIEND_TANK;
+    }
 }

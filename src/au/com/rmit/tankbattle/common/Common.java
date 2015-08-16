@@ -14,10 +14,10 @@ public class Common
 
     public static final float SPEED_EXPLODE_PARTICLE = 300;
 
-    public static final float SPEED_MISSILE_FRIEND = 500;
+    public static final float SPEED_MISSILE_FRIEND = 600;
     public static final float SPEED_MISSILE_ENEMY = 400;
 
-    public static final float SPEED_ENEMY_TANK = 200;
+    public static final float SPEED_ENEMY_TANK = 150;
     public static final float SPEED_FRIEND_TANK = 200;
 
     public static final int SCORE_ENEMY = 5;

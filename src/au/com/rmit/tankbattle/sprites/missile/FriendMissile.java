@@ -35,4 +35,10 @@ public class FriendMissile extends Missile
         theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
 
     }
+    
+    @Override
+    Color getExplosionColor()
+    {
+        return Color.red;
+    }
 }
