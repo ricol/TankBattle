@@ -22,6 +22,7 @@ import java.util.ArrayList;
  */
 public class Tank extends MovingObject
 {
+
     Missile theMissile;
 
     public static enum DIRECTION
@@ -177,10 +178,12 @@ public class Tank extends MovingObject
 
     public void fire()
     {
-        if (this.theMissile != null) return;
-        
-        if (this.theScene == null) return;
-        
+        if (this.theMissile != null)
+            return;
+
+        if (this.theScene == null)
+            return;
+
         if (this.theDirection == DIRECTION.TOP)
         {
             Fire aFire = new Fire();
@@ -232,7 +235,7 @@ public class Tank extends MovingObject
             aMissile.setCentreY(this.getCentreY());
             aMissile.setVelocityX(this.getMissileVelocity());
         }
-        
+
         this.theMissile = aMissile;
     }
 
@@ -245,7 +248,7 @@ public class Tank extends MovingObject
     {
         return 0;
     }
-    
+
     public void clearMissile()
     {
         this.theMissile = null;

@@ -28,7 +28,7 @@ public class Missile extends MovingObject
     public Missile(Tank theTank)
     {
         super();
-        
+
         this.theTank = theTank;
 
         this.setWidth(10);
@@ -60,7 +60,7 @@ public class Missile extends MovingObject
         this.theTank.clearMissile();
         super.onDead(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     protected void explode()
     {
         int number = abs(theRandom.nextInt()) % 10 + 10;

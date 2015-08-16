@@ -10,14 +10,12 @@ import au.com.rmit.Game2dEngine.scene.Scene;
 import au.com.rmit.tankbattle.other.Wall;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  *
  * @author ricolwang
  */
-public class WallScene extends Scene implements MouseListener
+public class WallScene extends Scene
 {
 
     public Wall theWallTop;
@@ -76,33 +74,6 @@ public class WallScene extends Scene implements MouseListener
             }
         });
 
-        this.addMouseListener(this);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e)
-    {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e)
-    {
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e)
-    {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e)
-    {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e)
-    {
     }
 
     void buildWalls()

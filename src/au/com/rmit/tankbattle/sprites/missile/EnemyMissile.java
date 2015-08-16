@@ -16,10 +16,11 @@ import java.awt.Graphics2D;
  */
 public class EnemyMissile extends Missile
 {
+
     public EnemyMissile(Tank theTank)
     {
         super(theTank);
-        
+
         this.setCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
