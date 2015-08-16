@@ -20,6 +20,8 @@ public class FriendTank extends Tank
     {
         super("resource/Friend.png");
 
+        this.life = 10000;
+
         this.setCollisionCategory(Common.CATEGORY_FRIEND_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
@@ -61,5 +63,11 @@ public class FriendTank extends Tank
     double getTankSpeed()
     {
         return Common.SPEED_FRIEND_TANK;
+    }
+
+    @Override
+    public void changeMovingDirection(DIRECTION theOldDirection)
+    {
+
     }
 }

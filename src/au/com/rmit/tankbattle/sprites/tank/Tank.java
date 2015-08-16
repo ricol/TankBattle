@@ -55,9 +55,9 @@ public class Tank extends MovingObject
     }
 
     @Override
-    public void afterCollisionProcess(double currentTime)
+    public void updateState(double currentTime)
     {
-        super.afterCollisionProcess(currentTime); //To change body of generated methods, choose Tools | Templates.
+        super.updateState(currentTime); //To change body of generated methods, choose Tools | Templates.
 
         this.checkWall();
         this.checkTank();
@@ -76,21 +76,38 @@ public class Tank extends MovingObject
         if (this.theScene == null)
             return;
 
+        boolean bHitWall = false;
+
         Wall theWall = ((TankBattleScene) this.theScene).theWallTop;
         while (this.getY() < theWall.getY() + theWall.getHeight())
+        {
             this.setY(this.getY() + 1);
+            bHitWall = true;
+        }
 
         theWall = ((TankBattleScene) this.theScene).theWallBottom;
         while (this.getY() + this.getHeight() > theWall.getY())
+        {
             this.setY(this.getY() - 1);
+            bHitWall = true;
+        }
 
         theWall = ((TankBattleScene) this.theScene).theWallLeft;
         while (this.getX() < theWall.getX() + theWall.getWidth())
+        {
             this.setX(this.getX() + 1);
+            bHitWall = true;
+        }
 
         theWall = ((TankBattleScene) this.theScene).theWallRight;
         while (this.getX() + this.getWidth() > theWall.getX())
+        {
             this.setX(this.getX() - 1);
+            bHitWall = true;
+        }
+
+        if (bHitWall)
+            this.changeMovingDirection(this.theDirection);
     }
 
     private void checkTank()
@@ -123,6 +140,8 @@ public class Tank extends MovingObject
         {
             this.restoreX();
             this.restoreY();
+
+            this.changeMovingDirection(this.theDirection);
         }
     }
 
