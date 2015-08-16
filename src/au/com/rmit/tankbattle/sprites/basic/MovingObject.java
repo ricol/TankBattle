@@ -71,7 +71,7 @@ public class MovingObject extends Sprite
             this.theScene.addSprite(aFire);
         }
     }
-    
+
     protected Color getExplosionColor()
     {
         return Color.white;

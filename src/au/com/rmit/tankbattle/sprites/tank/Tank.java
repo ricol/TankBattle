@@ -8,7 +8,6 @@ package au.com.rmit.tankbattle.sprites.tank;
 import au.com.rmit.Game2dEngine.geometry.shape.RectangleShape;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.other.Fire;
-import au.com.rmit.tankbattle.other.Wall;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
 import au.com.rmit.tankbattle.sprites.basic.MovingObject;
 import au.com.rmit.tankbattle.sprites.missile.Missile;
@@ -78,36 +77,18 @@ public class Tank extends MovingObject
 
         boolean bHitWall = false;
 
-        Wall theWall = ((TankBattleScene) this.theScene).theWallTop;
-        while (this.getY() < theWall.getY() + theWall.getHeight())
-        {
-            this.setY(this.getY() + 1);
+        if (this.collideWith(((TankBattleScene) this.theScene).theWallTop)
+            || this.collideWith(((TankBattleScene) this.theScene).theWallBottom)
+            || this.collideWith(((TankBattleScene) this.theScene).theWallLeft)
+            || this.collideWith(((TankBattleScene) this.theScene).theWallRight))
             bHitWall = true;
-        }
-
-        theWall = ((TankBattleScene) this.theScene).theWallBottom;
-        while (this.getY() + this.getHeight() > theWall.getY())
-        {
-            this.setY(this.getY() - 1);
-            bHitWall = true;
-        }
-
-        theWall = ((TankBattleScene) this.theScene).theWallLeft;
-        while (this.getX() < theWall.getX() + theWall.getWidth())
-        {
-            this.setX(this.getX() + 1);
-            bHitWall = true;
-        }
-
-        theWall = ((TankBattleScene) this.theScene).theWallRight;
-        while (this.getX() + this.getWidth() > theWall.getX())
-        {
-            this.setX(this.getX() - 1);
-            bHitWall = true;
-        }
 
         if (bHitWall)
+        {
+            this.restoreX();
+            this.restoreY();
             this.changeMovingDirection(this.theDirection);
+        }
     }
 
     private void checkTank()
@@ -133,10 +114,7 @@ public class Tank extends MovingObject
         if (aTank.equals(this))
             return;
 
-        RectangleShape theShape = (RectangleShape) this.getTheShape();
-        RectangleShape theTarget = (RectangleShape) aTank.getTheShape();
-
-        if (theShape.collideWith(theTarget))
+        if (this.collideWith(aTank))
         {
             this.restoreX();
             this.restoreY();
