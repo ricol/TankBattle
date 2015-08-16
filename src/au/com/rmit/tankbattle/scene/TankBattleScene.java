@@ -56,9 +56,8 @@ public class TankBattleScene extends WallScene
 
     public void addAEnemy()
     {
-        int num = theRandom.nextInt() % 3;
         double width = 50;
-        RectangleShape aRectangle = new RectangleShape(((this.getWidth() - width - 2 * this.theWallLeft.getWidth() - 10) / 2.0) * num, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
+        RectangleShape aRectangle = new RectangleShape(this.getWidth() / 2 - width / 2, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
 
         boolean bCollide = false;
 
@@ -282,7 +281,7 @@ public class TankBattleScene extends WallScene
         theFriendTank = new FriendTank();
 
         theFriendTank.setCentreX(this.getWidth() / 2.0f);
-        theFriendTank.setCentreY(this.getHeight());
+        theFriendTank.setCentreY(this.theWallBottom.getY() - theFriendTank.getHeight() / 2 - 5);
 
         addSprite(theFriendTank);
 
