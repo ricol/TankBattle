@@ -16,10 +16,11 @@ import java.awt.Graphics2D;
  */
 public class EnemyMissile extends Missile
 {
+
     public EnemyMissile(Tank theTank)
     {
         super(theTank);
-        
+
         this.setCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
@@ -32,5 +33,11 @@ public class EnemyMissile extends Missile
 
         theGraphics2D.setColor(Color.BLUE);
         theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
+    }
+    
+    @Override
+    Color getExplosionColor()
+    {
+        return Color.blue;
     }
 }

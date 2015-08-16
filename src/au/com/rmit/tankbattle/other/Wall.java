@@ -16,11 +16,12 @@ import java.awt.Graphics2D;
  */
 public class Wall extends WallSprite
 {
+
     public Wall()
     {
         super();
         this.bCustomDrawing = true;
-        
+
         this.bCollisionDetect = true;
         this.setCollisionCategory(Common.CATEGORY_WALL);
     }
@@ -29,8 +30,8 @@ public class Wall extends WallSprite
     public void onCustomDraw(Graphics2D theGraphics2D)
     {
         super.onCustomDraw(theGraphics2D); //To change body of generated methods, choose Tools | Templates.
-        
+
         theGraphics2D.setColor(Color.green);
-        theGraphics2D.fillRect(0, 0, (int)this.getWidth(), (int)this.getHeight());
+        theGraphics2D.fillRect(0, 0, (int) this.getWidth(), (int) this.getHeight());
     }
 }

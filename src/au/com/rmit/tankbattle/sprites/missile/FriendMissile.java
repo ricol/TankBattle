@@ -20,12 +20,12 @@ public class FriendMissile extends Missile
     public FriendMissile(Tank theTank)
     {
         super(theTank);
-        
+
         this.setCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
-    }   
-    
+    }
+
     @Override
     public void onCustomDraw(Graphics2D theGraphics2D)
     {
@@ -33,6 +33,12 @@ public class FriendMissile extends Missile
 
         theGraphics2D.setColor(Color.RED);
         theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
-        
+
+    }
+    
+    @Override
+    Color getExplosionColor()
+    {
+        return Color.red;
     }
 }

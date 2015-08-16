@@ -5,7 +5,9 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
+import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
+import au.com.rmit.tankbattle.other.Wall;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
 import au.com.rmit.tankbattle.sprites.missile.EnemyMissile;
 import au.com.rmit.tankbattle.sprites.missile.Missile;
@@ -27,6 +29,7 @@ public class EnemyTank extends Tank implements ActionListener
     {
         super(imagename);
 
+        this.life = 20;
         theTimerAdjust.start();
         theTimerForFire.start();
         this.theDirection = DIRECTION.BOTTOM;
@@ -63,13 +66,14 @@ public class EnemyTank extends Tank implements ActionListener
     }
 
     @Override
-    public void onDead()
+    public void onWillDead()
     {
+        super.onWillDead(); //To change body of generated methods, choose Tools | Templates.
+        
         ((TankBattleScene) this.theScene).deleteAEnemy(this);
-
-        super.onDead();
+        ((TankBattleScene) this.theScene).killAEnemy(this);
     }
-
+    
     @Override
     Missile getAMissile()
     {
@@ -80,5 +84,22 @@ public class EnemyTank extends Tank implements ActionListener
     double getMissileVelocity()
     {
         return Common.SPEED_MISSILE_ENEMY;
+    }
+
+    @Override
+    double getTankSpeed()
+    {
+        return Common.SPEED_ENEMY_TANK;
+    }
+
+    @Override
+    public void onCollideWith(Sprite target)
+    {
+        super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
+
+        if (target instanceof Wall)
+        {
+            this.changeMovingDirection(this.theDirection);
+        }
     }
 }

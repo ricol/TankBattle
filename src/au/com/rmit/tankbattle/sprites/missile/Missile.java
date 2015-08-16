@@ -28,7 +28,7 @@ public class Missile extends MovingObject
     public Missile(Tank theTank)
     {
         super();
-        
+
         this.theTank = theTank;
 
         this.setWidth(10);
@@ -60,7 +60,7 @@ public class Missile extends MovingObject
         this.theTank.clearMissile();
         super.onDead(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     protected void explode()
     {
         int number = abs(theRandom.nextInt()) % 10 + 10;
@@ -75,9 +75,10 @@ public class Missile extends MovingObject
             aFire.setY(this.getCentreY());
             aFire.setVelocityX(tmpX);
             aFire.setVelocityY(tmpY);
-            aFire.setRed(255);
-            aFire.setGreen(255);
-            aFire.setBlue(255);
+            Color theColor = this.getExplosionColor();
+            aFire.setRed(theColor.getRed());
+            aFire.setGreen(theColor.getGreen());
+            aFire.setBlue(theColor.getBlue());
             aFire.bDeadIfNoActions = true;
 
             AlphaToAction aAction = new AlphaToAction(aFire);
@@ -90,5 +91,10 @@ public class Missile extends MovingObject
             }
             this.theScene.addSprite(aFire);
         }
+    }
+    
+    Color getExplosionColor()
+    {
+        return Color.white;
     }
 }

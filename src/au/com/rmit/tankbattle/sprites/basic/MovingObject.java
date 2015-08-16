@@ -28,7 +28,7 @@ public class MovingObject extends Sprite
 
         this.init();
     }
-    
+
     final void init()
     {
         this.bCollisionDetect = true;
