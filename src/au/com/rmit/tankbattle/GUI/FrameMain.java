@@ -128,6 +128,14 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
                     {
                         theScene = new TankBattleScene();
                         Director.getSharedInstance().showScene(theScene);
+
+                        try
+                        {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex)
+                        {
+                        }
+                        theScene.gameStart();
                     }
                 });
 
