@@ -198,8 +198,9 @@ public class TankBattleScene extends WallScene
 
     public void killAEnemy(EnemyTank aEnemy)
     {
-        if (!this.bGameRunning) return;
-        
+        if (!this.bGameRunning)
+            return;
+
         Score aScore = new Score("+" + Common.SCORE_ENEMY);
         aScore.setCentreX(aEnemy.getCentreX());
         aScore.setCentreY(aEnemy.getCentreY());
