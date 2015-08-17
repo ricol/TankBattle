@@ -85,8 +85,7 @@ public class Tank extends MovingObject
 
         if (bHitWall)
         {
-            this.restoreX();
-            this.restoreY();
+            this.restorePosition();
             this.changeMovingDirection(this.theDirection);
         }
     }
@@ -116,9 +115,7 @@ public class Tank extends MovingObject
 
         if (this.collideWith(aTank))
         {
-            this.restoreX();
-            this.restoreY();
-
+            this.restorePosition();
             this.changeMovingDirection(this.theDirection);
         }
     }
