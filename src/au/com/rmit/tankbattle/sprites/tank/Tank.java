@@ -116,7 +116,7 @@ public class Tank extends MovingObject
         if (this.collideWith(aTank))
         {
             this.restorePosition();
-            this.changeMovingDirection(this.theDirection);
+//            this.changeMovingDirection(this.theDirection);
         }
     }
 
