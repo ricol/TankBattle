@@ -5,6 +5,7 @@
  */
 package au.com.rmit.tankbattle.GUI;
 
+import au.com.philology.common.JavaTheme;
 import javax.swing.SwingUtilities;
 
 /**
@@ -23,6 +24,7 @@ public class TankBattle
         {
             public void run()
             {
+                JavaTheme.setLookAndFeel(JavaTheme.LOOKANDFEEL_MOTIF);
                 new FrameMain().setVisible(true);
             }
         });

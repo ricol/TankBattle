@@ -54,9 +54,9 @@ public class Tank extends MovingObject
     }
 
     @Override
-    public void updateState(double currentTime)
+    public void didUpdateState()
     {
-        super.updateState(currentTime); //To change body of generated methods, choose Tools | Templates.
+        super.didUpdateState(); //To change body of generated methods, choose Tools | Templates.
 
         this.checkWall();
         this.checkTank();
@@ -78,15 +78,14 @@ public class Tank extends MovingObject
         boolean bHitWall = false;
 
         if (this.collideWith(((TankBattleScene) this.theScene).theWallTop)
-            || this.collideWith(((TankBattleScene) this.theScene).theWallBottom)
-            || this.collideWith(((TankBattleScene) this.theScene).theWallLeft)
-            || this.collideWith(((TankBattleScene) this.theScene).theWallRight))
+                || this.collideWith(((TankBattleScene) this.theScene).theWallBottom)
+                || this.collideWith(((TankBattleScene) this.theScene).theWallLeft)
+                || this.collideWith(((TankBattleScene) this.theScene).theWallRight))
             bHitWall = true;
 
         if (bHitWall)
         {
-            this.restoreX();
-            this.restoreY();
+            this.restorePosition();
             this.changeMovingDirection(this.theDirection);
         }
     }
@@ -116,10 +115,8 @@ public class Tank extends MovingObject
 
         if (this.collideWith(aTank))
         {
-            this.restoreX();
-            this.restoreY();
-
-            this.changeMovingDirection(this.theDirection);
+            this.restorePosition();
+//            this.changeMovingDirection(this.theDirection);
         }
     }
 
