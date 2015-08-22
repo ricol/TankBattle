@@ -152,6 +152,8 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
             btnStart.setText("Continue");
         else
             btnStart.setText("Pause");
+        
+        this.requestFocus();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
