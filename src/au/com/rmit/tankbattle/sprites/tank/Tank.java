@@ -5,7 +5,7 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
-import au.com.rmit.Game2dEngine.geometry.shape.RectangleShape;
+import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.other.Fire;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
@@ -36,7 +36,7 @@ public class Tank extends MovingObject
     {
         super(imagename);
 
-        RectangleShape aRectangleShape = new RectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        SpecialRectangleShape aRectangleShape = new SpecialRectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
         this.setTheShape(aRectangleShape);
     }
 
