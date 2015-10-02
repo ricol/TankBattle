@@ -78,10 +78,10 @@ public class Tank extends MovingObject
 
         boolean bHitWall = false;
 
-        if (PhysicsCollisionProcess.detectCollision(this, (((TankBattleScene) this.theScene).theWallTop))
-            || PhysicsCollisionProcess.detectCollision(this, (((TankBattleScene) this.theScene).theWallBottom))
-            || PhysicsCollisionProcess.detectCollision(this, (((TankBattleScene) this.theScene).theWallLeft))
-            || PhysicsCollisionProcess.detectCollision(this, (((TankBattleScene) this.theScene).theWallRight)))
+        if (PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallTop))
+            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallBottom))
+            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallLeft))
+            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallRight)))
             bHitWall = true;
 
         if (bHitWall)
@@ -114,7 +114,7 @@ public class Tank extends MovingObject
         if (aTank.equals(this))
             return;
 
-        if (PhysicsCollisionProcess.detectCollision(this, aTank))
+        if (PhysicsCollisionProcess.isCollide(this, aTank))
         {
             this.restorePosition();
 //            this.changeMovingDirection(this.theDirection);
