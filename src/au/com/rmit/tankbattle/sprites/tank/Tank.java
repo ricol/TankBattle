@@ -6,6 +6,7 @@
 package au.com.rmit.tankbattle.sprites.tank;
 
 import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
+import au.com.rmit.Game2dEngine.physics.collision.PhysicsCollisionProcess;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.other.Fire;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
@@ -77,10 +78,10 @@ public class Tank extends MovingObject
 
         boolean bHitWall = false;
 
-        if (this.collideWith(((TankBattleScene) this.theScene).theWallTop)
-                || this.collideWith(((TankBattleScene) this.theScene).theWallBottom)
-                || this.collideWith(((TankBattleScene) this.theScene).theWallLeft)
-                || this.collideWith(((TankBattleScene) this.theScene).theWallRight))
+        if (PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallTop))
+            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallBottom))
+            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallLeft))
+            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallRight)))
             bHitWall = true;
 
         if (bHitWall)
@@ -113,7 +114,7 @@ public class Tank extends MovingObject
         if (aTank.equals(this))
             return;
 
-        if (this.collideWith(aTank))
+        if (PhysicsCollisionProcess.isCollide(this, aTank))
         {
             this.restorePosition();
 //            this.changeMovingDirection(this.theDirection);
