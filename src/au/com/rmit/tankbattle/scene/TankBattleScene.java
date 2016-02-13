@@ -7,9 +7,9 @@ package au.com.rmit.tankbattle.scene;
 
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
-import au.com.rmit.Game2dEngine.geometry.shape.ClosureShape;
-import au.com.rmit.Game2dEngine.geometry.shape.RectangleShape;
-import au.com.rmit.Game2dEngine.geometry.shape.Shape;
+import au.com.rmit.Game2dEngine.geometry.ClosureShape;
+import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
+import au.com.rmit.Game2dEngine.geometry.Shape;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
@@ -57,7 +57,7 @@ public class TankBattleScene extends WallScene
     public void addAEnemy()
     {
         double width = 50;
-        RectangleShape aRectangle = new RectangleShape(this.getWidth() / 2 - width / 2, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
+        SpecialRectangleShape aRectangle = new SpecialRectangleShape(this.getWidth() / 2 - width / 2, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
 
         boolean bCollide = false;
 
