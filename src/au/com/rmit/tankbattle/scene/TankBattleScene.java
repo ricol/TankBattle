@@ -8,8 +8,8 @@ package au.com.rmit.tankbattle.scene;
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.geometry.ClosureShape;
-import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
 import au.com.rmit.Game2dEngine.geometry.Shape;
+import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
@@ -38,6 +38,11 @@ public class TankBattleScene extends WallScene
     public LabelSprite lblEnemyKilled;
     public LabelSprite lblMyLife;
     public LabelSprite lblScore;
+    public LabelSprite lblHelpW;
+    public LabelSprite lblHelpS;
+    public LabelSprite lblHelpA;
+    public LabelSprite lblHelpD;
+    public LabelSprite lblHelpSpace;
 
     int enemyKilled = 0;
     int mylife = 3;
@@ -160,6 +165,90 @@ public class TankBattleScene extends WallScene
             addSprite(lblScore);
         }
         this.adjustLabelPos();
+        
+        int tmpBottom = 25;
+        int tmpMarginRight = 140;
+        int tmpGap = 1;
+
+        if (lblHelpW == null)
+        {
+            lblHelpW = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 5, "W: UP", null);
+
+            lblHelpW.setWidth(tmpWidth);
+
+            lblHelpW.setHeight(tmpHeight);
+
+            lblHelpW.setRed(
+                255);
+            lblHelpW.bTextFrame = false;
+            lblHelpW.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblHelpW);
+        }
+
+        if (lblHelpA == null)
+        {
+            lblHelpA = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 4, "A: LEFT", null);
+
+            lblHelpA.setWidth(tmpWidth);
+
+            lblHelpA.setHeight(tmpHeight);
+
+            lblHelpA.setRed(
+                255);
+            lblHelpA.bTextFrame = false;
+            lblHelpA.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblHelpA);
+        }
+
+        if (lblHelpS == null)
+        {
+            lblHelpS = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 3, "S: DOWN", null);
+
+            lblHelpS.setWidth(tmpWidth);
+
+            lblHelpS.setHeight(tmpHeight);
+
+            lblHelpS.setRed(
+                255);
+            lblHelpS.bTextFrame = false;
+            lblHelpS.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblHelpS);
+        }
+
+        if (lblHelpD == null)
+        {
+            lblHelpD = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 2, "D: RIGHT", null);
+
+            lblHelpD.setWidth(tmpWidth);
+
+            lblHelpD.setHeight(tmpHeight);
+
+            lblHelpD.setRed(
+                255);
+            lblHelpD.bTextFrame = false;
+            lblHelpD.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblHelpD);
+        }
+
+        if (lblHelpSpace == null)
+        {
+            lblHelpSpace = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap), "SPACE: FIRE", null);
+
+            lblHelpSpace.setWidth(tmpWidth);
+
+            lblHelpSpace.setHeight(tmpHeight);
+
+            lblHelpSpace.setRed(
+                255);
+            lblHelpSpace.bTextFrame = false;
+            lblHelpSpace.setLayer(Common.LAYER_TEXT);
+
+            addSprite(lblHelpSpace);
+        }
     }
 
     public void adjustLabelPos()
