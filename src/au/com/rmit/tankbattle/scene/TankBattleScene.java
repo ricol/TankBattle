@@ -165,7 +165,7 @@ public class TankBattleScene extends WallScene
             addSprite(lblScore);
         }
         this.adjustLabelPos();
-        
+
         int tmpBottom = 25;
         int tmpMarginRight = 140;
         int tmpGap = 1;
@@ -271,6 +271,38 @@ public class TankBattleScene extends WallScene
         {
             lblScore.setX(this.getWidth() - tmpMarginRight);
             lblScore.setY(tmpY + (tmpHeight + tmpGap) * 2);
+        }
+
+        int tmpBottom = 25;
+
+        if (lblHelpW != null)
+        {
+            lblHelpW.setX(this.getWidth() - tmpMarginRight);
+            lblHelpW.setY(this.getHeight() - (tmpBottom + tmpGap) * 5);
+        }
+
+        if (lblHelpA != null)
+        {
+            lblHelpA.setX(this.getWidth() - tmpMarginRight);
+            lblHelpA.setY(this.getHeight() - (tmpBottom + tmpGap) * 4);
+        }
+
+        if (lblHelpS != null)
+        {
+            lblHelpS.setX(this.getWidth() - tmpMarginRight);
+            lblHelpS.setY(this.getHeight() - (tmpBottom + tmpGap) * 3);
+        }
+
+        if (lblHelpD != null)
+        {
+            lblHelpD.setX(this.getWidth() - tmpMarginRight);
+            lblHelpD.setY(this.getHeight() - (tmpBottom + tmpGap) * 2);
+        }
+
+        if (lblHelpSpace != null)
+        {
+            lblHelpSpace.setX(this.getWidth() - tmpMarginRight);
+            lblHelpSpace.setY(this.getHeight() - (tmpBottom + tmpGap));
         }
     }
 
