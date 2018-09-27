@@ -24,7 +24,7 @@ public class TankBattle
         {
             public void run()
             {
-                JavaTheme.setLookAndFeel(JavaTheme.LOOKANDFEEL_MOTIF);
+                JavaTheme.setLookAndFeel(JavaTheme.LOOKANDFEEL_NIBUM);
                 new FrameMain().setVisible(true);
             }
         });
