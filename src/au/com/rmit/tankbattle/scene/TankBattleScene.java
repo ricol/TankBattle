@@ -7,9 +7,9 @@ package au.com.rmit.tankbattle.scene;
 
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
-import au.com.rmit.Game2dEngine.geometry.ClosureShape;
-import au.com.rmit.Game2dEngine.geometry.Shape;
-import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
+import au.com.rmit.math.geometry.ClosureShape;
+import au.com.rmit.math.geometry.Shape;
+import au.com.rmit.math.geometry.SpecialRectangleShape;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.common.Common;
@@ -31,7 +31,7 @@ import javax.swing.Timer;
  * @author ricolwang
  */
 public class TankBattleScene extends WallScene
-    implements ActionListener
+        implements ActionListener
 {
 
     public boolean bGameRunning;
@@ -86,10 +86,14 @@ public class TankBattleScene extends WallScene
         }
 
         if (bCollide)
+        {
             return;
+        }
 
         if (this.allEnemies.size() >= Common.MAX_ENEMY)
+        {
             return;
+        }
 
         String[] data = new String[]
         {
@@ -103,9 +107,12 @@ public class TankBattleScene extends WallScene
         aEnemy.setY(aRectangle.top);
 
         if (theRandom.nextBoolean())
+        {
             aEnemy.movingBottom();
-        else
+        } else
+        {
             aEnemy.movingRight();
+        }
 
         this.addSprite(aEnemy);
         this.addAEnemy(aEnemy);
@@ -125,7 +132,7 @@ public class TankBattleScene extends WallScene
             lblMyLife.setHeight(tmpHeight);
 
             lblMyLife.setRed(
-                255);
+                    255);
             lblMyLife.bTextFrame = false;
             lblMyLife.setLayer(Common.LAYER_TEXT);
 
@@ -141,7 +148,7 @@ public class TankBattleScene extends WallScene
             lblEnemyKilled.setHeight(tmpHeight);
 
             lblEnemyKilled.setRed(
-                255);
+                    255);
             lblEnemyKilled.bTextFrame = false;
             lblEnemyKilled.setLayer(Common.LAYER_TEXT);
 
@@ -158,7 +165,7 @@ public class TankBattleScene extends WallScene
             lblScore.setHeight(tmpHeight);
 
             lblScore.setRed(
-                255);
+                    255);
             lblScore.bTextFrame = false;
             lblScore.setLayer(Common.LAYER_TEXT);
 
@@ -179,7 +186,7 @@ public class TankBattleScene extends WallScene
             lblHelpW.setHeight(tmpHeight);
 
             lblHelpW.setRed(
-                255);
+                    255);
             lblHelpW.bTextFrame = false;
             lblHelpW.setLayer(Common.LAYER_TEXT);
 
@@ -195,7 +202,7 @@ public class TankBattleScene extends WallScene
             lblHelpA.setHeight(tmpHeight);
 
             lblHelpA.setRed(
-                255);
+                    255);
             lblHelpA.bTextFrame = false;
             lblHelpA.setLayer(Common.LAYER_TEXT);
 
@@ -211,7 +218,7 @@ public class TankBattleScene extends WallScene
             lblHelpS.setHeight(tmpHeight);
 
             lblHelpS.setRed(
-                255);
+                    255);
             lblHelpS.bTextFrame = false;
             lblHelpS.setLayer(Common.LAYER_TEXT);
 
@@ -227,7 +234,7 @@ public class TankBattleScene extends WallScene
             lblHelpD.setHeight(tmpHeight);
 
             lblHelpD.setRed(
-                255);
+                    255);
             lblHelpD.bTextFrame = false;
             lblHelpD.setLayer(Common.LAYER_TEXT);
 
@@ -243,7 +250,7 @@ public class TankBattleScene extends WallScene
             lblHelpSpace.setHeight(tmpHeight);
 
             lblHelpSpace.setRed(
-                255);
+                    255);
             lblHelpSpace.bTextFrame = false;
             lblHelpSpace.setLayer(Common.LAYER_TEXT);
 
@@ -310,16 +317,22 @@ public class TankBattleScene extends WallScene
     public void actionPerformed(ActionEvent e)
     {
         if (!this.bGameRunning)
+        {
             return;
+        }
 
         if (e.getSource().equals(this.timerForEnemy))
+        {
             this.addAEnemy();
+        }
     }
 
     public void killAEnemy(EnemyTank aEnemy)
     {
         if (!this.bGameRunning)
+        {
             return;
+        }
 
         Score aScore = new Score("+" + Common.SCORE_ENEMY);
         aScore.setCentreX(aEnemy.getCentreX());
@@ -461,9 +474,12 @@ public class TankBattleScene extends WallScene
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
         {
             if (this.bGameRunning)
+            {
                 this.gameEnd();
-            else
+            } else
+            {
                 this.gameStart();
+            }
         } else if (this.bGameRunning)
         {
             if (e.getKeyChar() == 'a')
@@ -476,8 +492,9 @@ public class TankBattleScene extends WallScene
             {
                 theFriendTank.movingTop();
             } else if (e.getKeyChar() == 's')
+            {
                 theFriendTank.movingBottom();
-            else if (e.getKeyChar() == KeyEvent.VK_SPACE)
+            } else if (e.getKeyChar() == KeyEvent.VK_SPACE)
             {
                 theFriendTank.fire();
             }

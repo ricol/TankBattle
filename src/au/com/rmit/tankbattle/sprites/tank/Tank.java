@@ -5,7 +5,7 @@
  */
 package au.com.rmit.tankbattle.sprites.tank;
 
-import au.com.rmit.Game2dEngine.geometry.SpecialRectangleShape;
+import au.com.rmit.Game2dEngine.Shape.ESpecialRectangleShape;
 import au.com.rmit.Game2dEngine.physics.collision.PhysicsCollisionProcess;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.tankbattle.other.Fire;
@@ -37,7 +37,7 @@ public class Tank extends MovingObject
     {
         super(imagename);
 
-        SpecialRectangleShape aRectangleShape = new SpecialRectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        ESpecialRectangleShape aRectangleShape = new ESpecialRectangleShape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
         this.setTheShape(aRectangleShape);
     }
 
@@ -50,7 +50,9 @@ public class Tank extends MovingObject
         {
             this.life -= 10;
             if (this.life <= 0)
+            {
                 this.setShouldDie();
+            }
         }
     }
 
@@ -74,15 +76,19 @@ public class Tank extends MovingObject
     private void checkWall()
     {
         if (this.theScene == null)
+        {
             return;
+        }
 
         boolean bHitWall = false;
 
         if (PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallTop))
-            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallBottom))
-            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallLeft))
-            || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallRight)))
+                || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallBottom))
+                || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallLeft))
+                || PhysicsCollisionProcess.isCollide(this, (((TankBattleScene) this.theScene).theWallRight)))
+        {
             bHitWall = true;
+        }
 
         if (bHitWall)
         {
@@ -94,7 +100,9 @@ public class Tank extends MovingObject
     private void checkTank()
     {
         if (this.theScene == null)
+        {
             return;
+        }
 
         ArrayList<Sprite> allTanks = this.theScene.getAllSprites();
 
@@ -112,7 +120,9 @@ public class Tank extends MovingObject
     private void checkTank(Tank aTank)
     {
         if (aTank.equals(this))
+        {
             return;
+        }
 
         if (PhysicsCollisionProcess.isCollide(this, aTank))
         {
@@ -127,16 +137,22 @@ public class Tank extends MovingObject
         if (v != 0)
         {
             if (v > 0)
+            {
                 this.setAngle(Math.PI * 3.0 / 2.0);
-            else
+            } else
+            {
                 this.setAngle(Math.PI / 2);
+            }
         } else
         {
             v = this.getVelocityY();
             if (v > 0)
+            {
                 this.setAngle(0);
-            else
+            } else
+            {
                 this.setAngle(Math.PI);
+            }
         }
     }
 
@@ -185,10 +201,14 @@ public class Tank extends MovingObject
     public void fire()
     {
         if (this.theMissile != null)
+        {
             return;
+        }
 
         if (this.theScene == null)
+        {
             return;
+        }
 
         if (this.theDirection == DIRECTION.TOP)
         {
@@ -272,22 +292,32 @@ public class Tank extends MovingObject
         {
             int num = theRandom.nextInt() % 4;
             if (num == 0)
+            {
                 newDirection = DIRECTION.TOP;
-            else if (num == 1)
+            } else if (num == 1)
+            {
                 newDirection = DIRECTION.BOTTOM;
-            else if (num == 2)
+            } else if (num == 2)
+            {
                 newDirection = DIRECTION.LEFT;
-            else
+            } else
+            {
                 newDirection = DIRECTION.RIGHT;
+            }
         }
 
         if (newDirection == DIRECTION.TOP)
+        {
             this.movingTop();
-        else if (newDirection == DIRECTION.BOTTOM)
+        } else if (newDirection == DIRECTION.BOTTOM)
+        {
             this.movingBottom();
-        else if (newDirection == DIRECTION.LEFT)
+        } else if (newDirection == DIRECTION.LEFT)
+        {
             this.movingLeft();
-        else
+        } else
+        {
             this.movingRight();
+        }
     }
 }

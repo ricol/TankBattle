@@ -5,7 +5,7 @@
  */
 package au.com.rmit.tankbattle.GUI;
 
-import au.com.philology.common.JavaTheme;
+import au.com.rmit.common.JavaTheme;
 import javax.swing.SwingUtilities;
 
 /**

@@ -48,7 +48,9 @@ public class EnemyTank extends Tank implements ActionListener
         } else if (e.getSource().equals(this.theTimerForFire))
         {
             if (theRandom.nextBoolean())
+            {
                 this.fire();
+            }
         }
     }
 
@@ -56,13 +58,18 @@ public class EnemyTank extends Tank implements ActionListener
     {
         int num = theRandom.nextInt() % 4;
         if (num == 0)
+        {
             this.movingLeft();
-        else if (num == 1)
+        } else if (num == 1)
+        {
             this.movingRight();
-        else if (num == 2)
+        } else if (num == 2)
+        {
             this.movingTop();
-        else
+        } else
+        {
             this.movingBottom();
+        }
     }
 
     @Override
