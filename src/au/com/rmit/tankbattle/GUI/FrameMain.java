@@ -135,7 +135,9 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
     private void formComponentResized(java.awt.event.ComponentEvent evt)//GEN-FIRST:event_formComponentResized
     {//GEN-HEADEREND:event_formComponentResized
         if (theScene != null)
+        {
             theScene.adjustLabelPos();
+        }
     }//GEN-LAST:event_formComponentResized
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
@@ -146,13 +148,18 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
             Director.getSharedInstance().showScene(theScene);
             theScene.gameStart();
         } else
+        {
             theScene.pause();
+        }
 
         if (theScene.isScenePaused())
+        {
             btnStart.setText("Continue");
-        else
+        } else
+        {
             btnStart.setText("Pause");
-        
+        }
+
         this.requestFocus();
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -176,14 +183,18 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
     public void keyPressed(KeyEvent e)
     {
         if (this.theScene != null)
+        {
             this.theScene.keyPressed(e);
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
         if (this.theScene != null)
+        {
             this.theScene.keyReleased(e);
+        }
     }
 
 }
