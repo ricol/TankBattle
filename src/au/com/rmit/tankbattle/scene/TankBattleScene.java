@@ -5,13 +5,13 @@
  */
 package au.com.rmit.tankbattle.scene;
 
+import au.com.rmit.Game2dEngine.Shape.EIShape;
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
-import au.com.rmit.math.geometry.ClosureShape;
-import au.com.rmit.math.geometry.Shape;
-import au.com.rmit.math.geometry.SpecialRectangleShape;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
+import au.com.rmit.math.geometry.ClosureShape;
+import au.com.rmit.math.geometry.SpecialRectangleShape;
 import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.Score;
 import au.com.rmit.tankbattle.sprites.tank.EnemyTank;
@@ -72,7 +72,7 @@ public class TankBattleScene extends WallScene
             {
                 Tank aTank = (Tank) aSprite;
 
-                Shape theShape = aTank.getTheShape();
+                EIShape theShape = aTank.getTheShape();
                 if (theShape instanceof ClosureShape)
                 {
                     ClosureShape aClosureShape = (ClosureShape) theShape;

@@ -5,10 +5,10 @@
  */
 package au.com.rmit.tankbattle.sprites.missile;
 
+import au.com.rmit.Game2dEngine.painter.interfaces.IEngineGraphics;
 import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.sprites.tank.Tank;
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 /**
  *
@@ -27,12 +27,12 @@ public class FriendMissile extends Missile
     }
 
     @Override
-    public void onCustomDraw(Graphics2D theGraphics2D)
+    public void onCustomDraw(IEngineGraphics theEngineGraphics)
     {
-        super.onCustomDraw(theGraphics2D); //To change body of generated methods, choose Tools | Templates.
+        super.onCustomDraw(theEngineGraphics); //To change body of generated methods, choose Tools | Templates.
 
-        theGraphics2D.setColor(Color.RED);
-        theGraphics2D.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
+        theEngineGraphics.setColor(Color.RED);
+        theEngineGraphics.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
 
     }
 

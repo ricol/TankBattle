@@ -5,10 +5,10 @@
  */
 package au.com.rmit.tankbattle.other;
 
+import au.com.rmit.Game2dEngine.painter.interfaces.IEngineGraphics;
 import au.com.rmit.Game2dEngine.physics.sprites.WallSprite;
 import au.com.rmit.tankbattle.common.Common;
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Wall extends WallSprite
     }
 
     @Override
-    public void onCustomDraw(Graphics2D theGraphics2D)
+    public void onCustomDraw(IEngineGraphics theGraphics2D)
     {
         super.onCustomDraw(theGraphics2D); //To change body of generated methods, choose Tools | Templates.
 
