@@ -5,7 +5,6 @@
  */
 package au.com.rmit.tankbattle.scene;
 
-import au.com.rmit.Game2dEngine.Shape.EIShape;
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
@@ -25,6 +24,7 @@ import java.awt.event.KeyEvent;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
 import javax.swing.Timer;
+import au.com.rmit.Game2dEngine.Shape.Interface.IEShape;
 
 /**
  *
@@ -72,7 +72,7 @@ public class TankBattleScene extends WallScene
             {
                 Tank aTank = (Tank) aSprite;
 
-                EIShape theShape = aTank.getTheShape();
+                IEShape theShape = aTank.getTheShape();
                 if (theShape instanceof ClosureShape)
                 {
                     ClosureShape aClosureShape = (ClosureShape) theShape;
