@@ -5,6 +5,7 @@
  */
 package au.com.rmit.tankbattle.scene;
 
+import au.com.rmit.Game2dEngine.Shape.Interface.IEShape;
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
 import au.com.rmit.Game2dEngine.sprite.LabelSprite;
@@ -15,6 +16,7 @@ import au.com.rmit.tankbattle.common.Common;
 import au.com.rmit.tankbattle.other.Score;
 import au.com.rmit.tankbattle.sprites.tank.EnemyTank;
 import au.com.rmit.tankbattle.sprites.tank.FriendTank;
+import au.com.rmit.tankbattle.sprites.tank.KingEnemyTank;
 import au.com.rmit.tankbattle.sprites.tank.Tank;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,7 +26,6 @@ import java.awt.event.KeyEvent;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
 import javax.swing.Timer;
-import au.com.rmit.Game2dEngine.Shape.Interface.IEShape;
 
 /**
  *
@@ -56,14 +57,11 @@ public class TankBattleScene extends WallScene
 
     public TankBattleScene()
     {
-        this.enableCollisionDetect();
+        enableCollisionDetect();
     }
 
-    public void addAEnemy()
+    private boolean isPossibleToCreateAEnemy(SpecialRectangleShape area)
     {
-        double width = 50;
-        SpecialRectangleShape aRectangle = new SpecialRectangleShape(this.getWidth() / 2 - width / 2, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
-
         boolean bCollide = false;
 
         for (Sprite aSprite : this.getAllSprites())
@@ -76,7 +74,7 @@ public class TankBattleScene extends WallScene
                 if (theShape instanceof ClosureShape)
                 {
                     ClosureShape aClosureShape = (ClosureShape) theShape;
-                    if (aClosureShape.collideWith(aRectangle))
+                    if (aClosureShape.collideWith(area))
                     {
                         bCollide = true;
                         break;
@@ -87,22 +85,66 @@ public class TankBattleScene extends WallScene
 
         if (bCollide)
         {
-            return;
+            return false;
         }
 
         if (this.allEnemies.size() >= Common.MAX_ENEMY)
         {
-            return;
+            return false;
         }
 
-        String[] data = new String[]
+        return true;
+    }
+
+    private String getARandomEnemyImage(boolean bKingEnemy)
+    {
+        String[] dataEnemy = new String[]
         {
-            "Enemy.png"
+            "tank1.png", "tank2.png", "tank3.png", "tank4.png"
         };
 
-        int index = abs(theRandom.nextInt()) % data.length;
+        String[] dataKingEnemy = new String[]
+        {
+            "tank5.png", "tank6.png", "tank7.png", "tank8.png"
+        };
 
-        EnemyTank aEnemy = new EnemyTank("Resource/" + data[index]);
+        int index = abs(theRandom.nextInt()) % (bKingEnemy ? dataKingEnemy.length : dataEnemy.length);
+
+        return "Resource/" + (bKingEnemy ? dataKingEnemy[index] : dataEnemy[index]);
+    }
+
+    private EnemyTank addAEnemyCenter()
+    {
+        double width = 50;
+        SpecialRectangleShape aRectangle = new SpecialRectangleShape(this.getWidth() / 2 - width / 2, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
+        if (!isPossibleToCreateAEnemy(aRectangle)) return null;
+
+        EnemyTank aEnemy = theRandom.nextInt() % 10 > 7 ? new KingEnemyTank(getARandomEnemyImage(true)) : new EnemyTank(getARandomEnemyImage(false));
+        aEnemy.setX(aRectangle.left);
+        aEnemy.setY(aRectangle.top);
+
+        int result = theRandom.nextInt() % 10;
+        if (result > 7)
+        {
+            aEnemy.movingBottom();
+        } else if (result > 4)
+        {
+            aEnemy.movingRight();
+        } else
+        {
+            aEnemy.movingLeft();
+        }
+
+        return aEnemy;
+    }
+
+    private EnemyTank addAEnemyLeft()
+    {
+        double width = 50;
+        SpecialRectangleShape aRectangle = new SpecialRectangleShape(30, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
+        if (!isPossibleToCreateAEnemy(aRectangle)) return null;
+
+        EnemyTank aEnemy = theRandom.nextInt() % 10 > 7 ? new KingEnemyTank(getARandomEnemyImage(true)) : new EnemyTank(getARandomEnemyImage(false));
         aEnemy.setX(aRectangle.left);
         aEnemy.setY(aRectangle.top);
 
@@ -114,8 +156,42 @@ public class TankBattleScene extends WallScene
             aEnemy.movingRight();
         }
 
-        this.addSprite(aEnemy);
-        this.addAEnemy(aEnemy);
+        return aEnemy;
+    }
+
+    private EnemyTank addAEnemyRight()
+    {
+        double width = 50;
+        SpecialRectangleShape aRectangle = new SpecialRectangleShape(this.getWidth() - width - 30, this.theWallTop.getY() + this.theWallTop.getHeight() + 5, width, width);
+        if (!isPossibleToCreateAEnemy(aRectangle)) return null;
+
+        EnemyTank aEnemy = theRandom.nextInt() % 10 > 7 ? new KingEnemyTank(getARandomEnemyImage(true)) : new EnemyTank(getARandomEnemyImage(false));
+        aEnemy.setX(aRectangle.left);
+        aEnemy.setY(aRectangle.top);
+
+        if (theRandom.nextBoolean())
+        {
+            aEnemy.movingBottom();
+        } else
+        {
+            aEnemy.movingLeft();
+        }
+
+        return aEnemy;
+    }
+
+    public void addAEnemy()
+    {
+        EnemyTank aEnemy;
+        int result = theRandom.nextInt() % 10;
+        if (result > 7) aEnemy = addAEnemyCenter();
+        else if (result > 4) aEnemy = addAEnemyLeft();
+        else aEnemy = addAEnemyRight();
+        if (aEnemy != null)
+        {
+            this.addSprite(aEnemy);
+            this.addAEnemy(aEnemy);
+        }
     }
 
     private void addLabels()
@@ -173,13 +249,14 @@ public class TankBattleScene extends WallScene
         }
         this.adjustLabelPos();
 
+        int tmpBottomBase = 20;
         int tmpBottom = 25;
         int tmpMarginRight = 140;
         int tmpGap = 1;
 
         if (lblHelpW == null)
         {
-            lblHelpW = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 5, "W: UP", null);
+            lblHelpW = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 5 - tmpBottomBase, "W: UP", null);
 
             lblHelpW.setWidth(tmpWidth);
 
@@ -195,7 +272,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpA == null)
         {
-            lblHelpA = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 4, "A: LEFT", null);
+            lblHelpA = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 4 - tmpBottomBase, "A: LEFT", null);
 
             lblHelpA.setWidth(tmpWidth);
 
@@ -211,7 +288,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpS == null)
         {
-            lblHelpS = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 3, "S: DOWN", null);
+            lblHelpS = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 3 - tmpBottomBase, "S: DOWN", null);
 
             lblHelpS.setWidth(tmpWidth);
 
@@ -227,7 +304,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpD == null)
         {
-            lblHelpD = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 2, "D: RIGHT", null);
+            lblHelpD = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 2 - tmpBottomBase, "D: RIGHT", null);
 
             lblHelpD.setWidth(tmpWidth);
 
@@ -243,7 +320,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpSpace == null)
         {
-            lblHelpSpace = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap), "SPACE: FIRE", null);
+            lblHelpSpace = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) - tmpBottomBase, "SPACE: FIRE", null);
 
             lblHelpSpace.setWidth(tmpWidth);
 
@@ -260,7 +337,7 @@ public class TankBattleScene extends WallScene
 
     public void adjustLabelPos()
     {
-        int tmpY = 20;
+        int tmpY = 40;
         int tmpMarginRight = 140;
         int tmpHeight = 20;
         int tmpGap = 1;
@@ -281,35 +358,36 @@ public class TankBattleScene extends WallScene
         }
 
         int tmpBottom = 25;
+        int tmpBottomBase = 20;
 
         if (lblHelpW != null)
         {
             lblHelpW.setX(this.getWidth() - tmpMarginRight);
-            lblHelpW.setY(this.getHeight() - (tmpBottom + tmpGap) * 5);
+            lblHelpW.setY(this.getHeight() - (tmpBottom + tmpGap) * 5 - tmpBottomBase);
         }
 
         if (lblHelpA != null)
         {
             lblHelpA.setX(this.getWidth() - tmpMarginRight);
-            lblHelpA.setY(this.getHeight() - (tmpBottom + tmpGap) * 4);
+            lblHelpA.setY(this.getHeight() - (tmpBottom + tmpGap) * 4 - tmpBottomBase);
         }
 
         if (lblHelpS != null)
         {
             lblHelpS.setX(this.getWidth() - tmpMarginRight);
-            lblHelpS.setY(this.getHeight() - (tmpBottom + tmpGap) * 3);
+            lblHelpS.setY(this.getHeight() - (tmpBottom + tmpGap) * 3 - tmpBottomBase);
         }
 
         if (lblHelpD != null)
         {
             lblHelpD.setX(this.getWidth() - tmpMarginRight);
-            lblHelpD.setY(this.getHeight() - (tmpBottom + tmpGap) * 2);
+            lblHelpD.setY(this.getHeight() - (tmpBottom + tmpGap) * 2 - tmpBottomBase);
         }
 
         if (lblHelpSpace != null)
         {
             lblHelpSpace.setX(this.getWidth() - tmpMarginRight);
-            lblHelpSpace.setY(this.getHeight() - (tmpBottom + tmpGap));
+            lblHelpSpace.setY(this.getHeight() - (tmpBottom + tmpGap) - tmpBottomBase);
         }
     }
 
@@ -482,21 +560,25 @@ public class TankBattleScene extends WallScene
             }
         } else if (this.bGameRunning)
         {
-            if (e.getKeyChar() == 'a')
+            switch (e.getKeyChar())
             {
-                theFriendTank.movingLeft();
-            } else if (e.getKeyChar() == 'd')
-            {
-                theFriendTank.movingRight();
-            } else if (e.getKeyChar() == 'w')
-            {
-                theFriendTank.movingTop();
-            } else if (e.getKeyChar() == 's')
-            {
-                theFriendTank.movingBottom();
-            } else if (e.getKeyChar() == KeyEvent.VK_SPACE)
-            {
-                theFriendTank.fire();
+                case 'a':
+                    theFriendTank.movingLeft();
+                    break;
+                case 'd':
+                    theFriendTank.movingRight();
+                    break;
+                case 'w':
+                    theFriendTank.movingTop();
+                    break;
+                case 's':
+                    theFriendTank.movingBottom();
+                    break;
+                case KeyEvent.VK_SPACE:
+                    theFriendTank.fire();
+                    break;
+                default:
+                    break;
             }
         }
     }

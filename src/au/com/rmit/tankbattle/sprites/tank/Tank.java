@@ -7,7 +7,9 @@ package au.com.rmit.tankbattle.sprites.tank;
 
 import au.com.rmit.Game2dEngine.Shape.ESpecialRectangleShape;
 import au.com.rmit.Game2dEngine.physics.collision.PhysicsCollisionProcess;
+import au.com.rmit.Game2dEngine.scene.Layer;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
+import au.com.rmit.Game2dEngine.sprite.other.LifeBar;
 import au.com.rmit.tankbattle.other.Fire;
 import au.com.rmit.tankbattle.scene.TankBattleScene;
 import au.com.rmit.tankbattle.sprites.basic.MovingObject;
@@ -22,8 +24,11 @@ import java.util.ArrayList;
 public class Tank extends MovingObject
 {
 
+    private LifeBar theLifeBar;
+    boolean bShowLifeBar = true;
     Missile theMissile;
     protected int life = 100;
+    protected int totalLife = 100;
 
     public static enum DIRECTION
     {
@@ -48,10 +53,15 @@ public class Tank extends MovingObject
 
         if (target instanceof Missile)
         {
-            this.life -= 10;
-            if (this.life <= 0)
+            if (((Missile) target).getTank() != this)
             {
-                this.setShouldDie();
+                int value = 10;
+                this.life -= value;
+                if (this.life <= 0)
+                {
+                    this.setShouldDie();
+                }
+                this.theLifeBar.decreaseLifeBy(value);
             }
         }
     }
@@ -318,6 +328,20 @@ public class Tank extends MovingObject
         } else
         {
             this.movingRight();
+        }
+    }
+
+    @Override
+    public void onAddToLayer(Layer theLayer)
+    {
+        super.onAddToLayer(theLayer); //To change body of generated methods, choose Tools | Templates.
+
+        if (this.theLifeBar == null && this.bShowLifeBar)
+        {
+            this.theLifeBar = new LifeBar((int) this.getWidth(), 5, this.totalLife);
+            this.theLifeBar.setCentreX(this.getCentreX());
+            this.theLifeBar.setY(this.getY() + this.getHeight() + 20);
+            this.addAttached(this.theLifeBar);
         }
     }
 }

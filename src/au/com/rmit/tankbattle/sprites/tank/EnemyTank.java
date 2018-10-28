@@ -30,6 +30,7 @@ public class EnemyTank extends Tank implements ActionListener
         super(imagename);
 
         this.life = 20;
+        totalLife = this.life;
         theTimerAdjust.start();
         theTimerForFire.start();
         this.theDirection = DIRECTION.BOTTOM;
@@ -37,6 +38,8 @@ public class EnemyTank extends Tank implements ActionListener
         this.setCollisionCategory(Common.CATEGORY_ENEMY_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
     }
 
     @Override

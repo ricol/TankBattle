@@ -24,6 +24,8 @@ public class EnemyMissile extends Missile
         this.setCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
     }
 
     @Override

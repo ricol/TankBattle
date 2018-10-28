@@ -22,8 +22,10 @@ public class FriendMissile extends Missile
         super(theTank);
 
         this.setCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
-        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
+        this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
+        this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
+        this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_TANK);
     }
 
     @Override

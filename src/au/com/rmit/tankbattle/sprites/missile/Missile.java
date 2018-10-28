@@ -30,6 +30,11 @@ public class Missile extends MovingObject
         this.setHeight(10);
         this.bCustomDrawing = true;
     }
+    
+    public Tank getTank()
+    {
+        return theTank;
+    }
 
     @Override
     public void onCustomDraw(IEngineGraphics theEngineGraphics)
@@ -45,8 +50,11 @@ public class Missile extends MovingObject
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
 
-        this.explode(20);
-        this.setShouldDie();
+        if (this.theTank != target)
+        {
+            this.explode(20);
+            this.setShouldDie();
+        }
     }
 
     @Override

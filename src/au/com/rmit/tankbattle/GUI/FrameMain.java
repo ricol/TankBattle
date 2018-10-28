@@ -39,6 +39,7 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
     {
 
         panelGame = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         btnStart = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
@@ -52,13 +53,13 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
         });
         addWindowListener(new java.awt.event.WindowAdapter()
         {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt)
             {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
+                formWindowOpened(evt);
             }
         });
 
@@ -68,12 +69,14 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
         panelGame.setLayout(panelGameLayout);
         panelGameLayout.setHorizontalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
         panelGameLayout.setVerticalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 524, Short.MAX_VALUE)
         );
+
+        getContentPane().add(panelGame, java.awt.BorderLayout.CENTER);
 
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener()
@@ -83,6 +86,7 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
                 btnStartActionPerformed(evt);
             }
         });
+        jPanel1.add(btnStart);
 
         btnClose.setText("Close");
         btnClose.addActionListener(new java.awt.event.ActionListener()
@@ -92,33 +96,9 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
                 btnCloseActionPerformed(evt);
             }
         });
+        jPanel1.add(btnClose);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnStart)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnClose)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClose)
-                    .addComponent(btnStart))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,6 +151,7 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnStart;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelGame;
     // End of variables declaration//GEN-END:variables
 

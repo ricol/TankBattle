@@ -23,7 +23,7 @@ public class WallScene extends Scene
     public Wall theWallBottom;
     public Wall theWallRight;
 
-    int startX = 5, startY = 5;
+    int startX = 20, startY = 20;
     int wallSize = 5;
 
     void resizeWalls()
