@@ -338,7 +338,7 @@ public class TankBattleScene extends WallScene
     public void adjustLabelPos()
     {
         int tmpY = 40;
-        int tmpMarginRight = 140;
+        int tmpMarginRight = 150;
         int tmpHeight = 20;
         int tmpGap = 1;
         if (lblMyLife != null)
