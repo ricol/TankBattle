@@ -8,7 +8,7 @@ package au.com.rmit.tankbattle.scene;
 import au.com.rmit.Game2dEngine.Shape.Interface.IEShape;
 import au.com.rmit.Game2dEngine.action.AlphaByAction;
 import au.com.rmit.Game2dEngine.action.AlphaToAction;
-import au.com.rmit.Game2dEngine.sprite.LabelSprite;
+import au.com.rmit.Game2dEngine.sprite.UI.SLabel;
 import au.com.rmit.Game2dEngine.sprite.Sprite;
 import au.com.rmit.math.geometry.ClosureShape;
 import au.com.rmit.math.geometry.SpecialRectangleShape;
@@ -36,14 +36,14 @@ public class TankBattleScene extends WallScene
 {
 
     public boolean bGameRunning;
-    public LabelSprite lblEnemyKilled;
-    public LabelSprite lblMyLife;
-    public LabelSprite lblScore;
-    public LabelSprite lblHelpW;
-    public LabelSprite lblHelpS;
-    public LabelSprite lblHelpA;
-    public LabelSprite lblHelpD;
-    public LabelSprite lblHelpSpace;
+    public SLabel lblEnemyKilled;
+    public SLabel lblMyLife;
+    public SLabel lblScore;
+    public SLabel lblHelpW;
+    public SLabel lblHelpS;
+    public SLabel lblHelpA;
+    public SLabel lblHelpD;
+    public SLabel lblHelpSpace;
 
     int enemyKilled = 0;
     int mylife = 3;
@@ -201,7 +201,7 @@ public class TankBattleScene extends WallScene
 
         if (lblMyLife == null)
         {
-            lblMyLife = new LabelSprite(0, 0, "My Life: " + this.mylife, null);
+            lblMyLife = new SLabel(0, 0, "My Life: " + this.mylife, null);
 
             lblMyLife.setWidth(tmpWidth);
 
@@ -217,7 +217,7 @@ public class TankBattleScene extends WallScene
 
         if (lblEnemyKilled == null)
         {
-            lblEnemyKilled = new LabelSprite(0, 0, "Enemy Killed: " + this.enemyKilled, null);
+            lblEnemyKilled = new SLabel(0, 0, "Enemy Killed: " + this.enemyKilled, null);
 
             lblEnemyKilled.setWidth(tmpWidth);
 
@@ -234,7 +234,7 @@ public class TankBattleScene extends WallScene
         if (lblScore == null)
         {
 
-            lblScore = new LabelSprite(0, 0, "Score: " + this.score, null);
+            lblScore = new SLabel(0, 0, "Score: " + this.score, null);
 
             lblScore.setWidth(tmpWidth);
 
@@ -256,7 +256,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpW == null)
         {
-            lblHelpW = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 5 - tmpBottomBase, "W: UP", null);
+            lblHelpW = new SLabel(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 5 - tmpBottomBase, "W: UP", null);
 
             lblHelpW.setWidth(tmpWidth);
 
@@ -272,7 +272,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpA == null)
         {
-            lblHelpA = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 4 - tmpBottomBase, "A: LEFT", null);
+            lblHelpA = new SLabel(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 4 - tmpBottomBase, "A: LEFT", null);
 
             lblHelpA.setWidth(tmpWidth);
 
@@ -288,7 +288,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpS == null)
         {
-            lblHelpS = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 3 - tmpBottomBase, "S: DOWN", null);
+            lblHelpS = new SLabel(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 3 - tmpBottomBase, "S: DOWN", null);
 
             lblHelpS.setWidth(tmpWidth);
 
@@ -304,7 +304,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpD == null)
         {
-            lblHelpD = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 2 - tmpBottomBase, "D: RIGHT", null);
+            lblHelpD = new SLabel(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) * 2 - tmpBottomBase, "D: RIGHT", null);
 
             lblHelpD.setWidth(tmpWidth);
 
@@ -320,7 +320,7 @@ public class TankBattleScene extends WallScene
 
         if (lblHelpSpace == null)
         {
-            lblHelpSpace = new LabelSprite(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) - tmpBottomBase, "SPACE: FIRE", null);
+            lblHelpSpace = new SLabel(this.getWidth() - tmpMarginRight, this.getHeight() - (tmpBottom + tmpGap) - tmpBottomBase, "SPACE: FIRE", null);
 
             lblHelpSpace.setWidth(tmpWidth);
 
@@ -474,7 +474,7 @@ public class TankBattleScene extends WallScene
         score = 0;
         this.updateLabels();
 
-        LabelSprite aLabel = new LabelSprite("Game Start", new Font("TimesRoman", Font.PLAIN, 30));
+        SLabel aLabel = new SLabel("Game Start", new Font("TimesRoman", Font.PLAIN, 30));
         aLabel.setWidth(150);
         aLabel.setHeight(30);
         aLabel.textPosY = 25;
@@ -529,7 +529,7 @@ public class TankBattleScene extends WallScene
         score = 0;
         this.updateLabels();
 
-        LabelSprite aLabel = new LabelSprite("Game End", new Font("TimesRoman", Font.PLAIN, 30));
+        SLabel aLabel = new SLabel("Game End", new Font("TimesRoman", Font.PLAIN, 30));
         aLabel.setWidth(150);
         aLabel.setHeight(30);
         aLabel.textPosY = 25;
