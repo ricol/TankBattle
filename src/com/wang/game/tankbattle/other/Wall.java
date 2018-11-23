@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.other;
+package com.wang.game.tankbattle.other;
 
-import au.com.rmit.Game2dEngine.painter.interfaces.IEngineGraphics;
-import au.com.rmit.Game2dEngine.physics.sprites.WallSprite;
-import au.com.rmit.tankbattle.common.Common;
+import com.wang.Game2dEngine.painter.interfaces.IEngineGraphics;
+import com.wang.Game2dEngine.physics.sprites.WallSprite;
+import com.wang.game.tankbattle.common.Common;
 import java.awt.Color;
 
 /**

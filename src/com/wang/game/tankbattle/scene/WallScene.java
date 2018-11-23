@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.scene;
+package com.wang.game.tankbattle.scene;
 
-import au.com.rmit.Game2dEngine.physics.sprites.WallSprite;
-import au.com.rmit.Game2dEngine.scene.Scene;
-import au.com.rmit.tankbattle.other.Wall;
+import com.wang.Game2dEngine.physics.sprites.WallSprite;
+import com.wang.Game2dEngine.scene.Scene;
+import com.wang.game.tankbattle.other.Wall;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 

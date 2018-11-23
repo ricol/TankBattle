@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.sprites.tank;
+package com.wang.game.tankbattle.sprites.tank;
 
-import au.com.rmit.tankbattle.common.Common;
-import au.com.rmit.tankbattle.sprites.missile.FriendMissile;
-import au.com.rmit.tankbattle.sprites.missile.Missile;
+import com.wang.game.tankbattle.common.Common;
+import com.wang.game.tankbattle.sprites.missile.FriendMissile;
+import com.wang.game.tankbattle.sprites.missile.Missile;
 
 /**
  *

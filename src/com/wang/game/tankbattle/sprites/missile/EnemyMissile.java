@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.sprites.missile;
+package com.wang.game.tankbattle.sprites.missile;
 
-import au.com.rmit.Game2dEngine.painter.interfaces.IEngineGraphics;
-import au.com.rmit.tankbattle.common.Common;
-import au.com.rmit.tankbattle.sprites.tank.Tank;
+import com.wang.Game2dEngine.painter.interfaces.IEngineGraphics;
+import com.wang.game.tankbattle.common.Common;
+import com.wang.game.tankbattle.sprites.tank.Tank;
 import java.awt.Color;
 
 /**
  *
  * @author ricolwang
  */
-public class FriendMissile extends Missile
+public class EnemyMissile extends Missile
 {
 
-    public FriendMissile(Tank theTank)
+    public EnemyMissile(Tank theTank)
     {
         super(theTank);
 
-        this.setCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
+        this.setCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_TANK);
         this.addTargetCollisionCategory(Common.CATEGORY_FRIEND_MISSILE);
         this.addTargetCollisionCategory(Common.CATEGORY_ENEMY_MISSILE);
@@ -33,14 +33,13 @@ public class FriendMissile extends Missile
     {
         super.onCustomDraw(theEngineGraphics); //To change body of generated methods, choose Tools | Templates.
 
-        theEngineGraphics.setColor(Color.RED);
+        theEngineGraphics.setColor(Color.BLUE);
         theEngineGraphics.fillArc(0, 0, (int) this.getWidth(), (int) this.getHeight(), 0, 360);
-
     }
 
     @Override
     protected Color getExplosionColor()
     {
-        return Color.red;
+        return Color.blue;
     }
 }

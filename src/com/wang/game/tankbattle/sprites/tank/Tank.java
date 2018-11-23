@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.sprites.tank;
+package com.wang.game.tankbattle.sprites.tank;
 
-import au.com.rmit.Game2dEngine.Shape.ESpecialRectangleShape;
-import au.com.rmit.Game2dEngine.physics.collision.PhysicsCollisionProcess;
-import au.com.rmit.Game2dEngine.scene.Layer;
-import au.com.rmit.Game2dEngine.sprite.Sprite;
-import au.com.rmit.Game2dEngine.sprite.other.LifeBar;
-import au.com.rmit.tankbattle.other.Fire;
-import au.com.rmit.tankbattle.scene.TankBattleScene;
-import au.com.rmit.tankbattle.sprites.basic.MovingObject;
-import au.com.rmit.tankbattle.sprites.missile.Missile;
-import au.com.rmit.tankbattle.sprites.tank.Tank.DIRECTION;
+import com.wang.Game2dEngine.Shape.ESpecialRectangleShape;
+import com.wang.Game2dEngine.physics.collision.PhysicsCollisionProcess;
+import com.wang.Game2dEngine.scene.Layer;
+import com.wang.Game2dEngine.sprite.Sprite;
+import com.wang.Game2dEngine.sprite.other.LifeBar;
+import com.wang.game.tankbattle.other.Fire;
+import com.wang.game.tankbattle.scene.TankBattleScene;
+import com.wang.game.tankbattle.sprites.basic.MovingObject;
+import com.wang.game.tankbattle.sprites.missile.Missile;
+import com.wang.game.tankbattle.sprites.tank.Tank.DIRECTION;
 import java.util.ArrayList;
 
 /**

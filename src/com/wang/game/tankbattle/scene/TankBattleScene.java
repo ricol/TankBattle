@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.scene;
+package com.wang.game.tankbattle.scene;
 
-import au.com.rmit.Game2dEngine.action.AlphaByAction;
-import au.com.rmit.Game2dEngine.action.AlphaToAction;
-import au.com.rmit.Game2dEngine.sprite.UI.SLabel;
-import au.com.rmit.Game2dEngine.sprite.Sprite;
-import au.com.rmit.math.geometry.ClosureShape;
-import au.com.rmit.math.geometry.SpecialRectangleShape;
-import au.com.rmit.tankbattle.common.Common;
-import au.com.rmit.tankbattle.other.Score;
-import au.com.rmit.tankbattle.sprites.tank.EnemyTank;
-import au.com.rmit.tankbattle.sprites.tank.FriendTank;
-import au.com.rmit.tankbattle.sprites.tank.KingEnemyTank;
-import au.com.rmit.tankbattle.sprites.tank.Tank;
+import com.wang.Game2dEngine.action.AlphaByAction;
+import com.wang.Game2dEngine.action.AlphaToAction;
+import com.wang.Game2dEngine.sprite.UI.SLabel;
+import com.wang.Game2dEngine.sprite.Sprite;
+import com.wang.math.geometry.ClosureShape;
+import com.wang.math.geometry.SpecialRectangleShape;
+import com.wang.game.tankbattle.common.Common;
+import com.wang.game.tankbattle.other.Score;
+import com.wang.game.tankbattle.sprites.tank.EnemyTank;
+import com.wang.game.tankbattle.sprites.tank.FriendTank;
+import com.wang.game.tankbattle.sprites.tank.KingEnemyTank;
+import com.wang.game.tankbattle.sprites.tank.Tank;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -25,7 +25,7 @@ import java.awt.event.KeyEvent;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
 import javax.swing.Timer;
-import au.com.rmit.Game2dEngine.Shape.Interface.IEShape;
+import com.wang.Game2dEngine.Shape.Interface.IEShape;
 
 /**
  *

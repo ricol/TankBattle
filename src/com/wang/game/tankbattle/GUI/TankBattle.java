@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.GUI;
+package com.wang.game.tankbattle.GUI;
 
-import au.com.rmit.common.JavaTheme;
+import com.wang.common.JavaTheme;
 import javax.swing.SwingUtilities;
 
 /**

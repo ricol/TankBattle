@@ -1,7 +1,7 @@
-package au.com.rmit.tankbattle.GUI;
+package com.wang.game.tankbattle.GUI;
 
-import au.com.rmit.Game2dEngine.director.Director;
-import au.com.rmit.tankbattle.scene.TankBattleScene;
+import com.wang.Game2dEngine.director.Director;
+import com.wang.game.tankbattle.scene.TankBattleScene;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -69,11 +69,11 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
         panelGame.setLayout(panelGameLayout);
         panelGameLayout.setHorizontalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 756, Short.MAX_VALUE)
         );
         panelGameLayout.setVerticalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
+            .addGap(0, 532, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelGame, java.awt.BorderLayout.CENTER);

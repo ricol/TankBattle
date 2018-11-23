@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package au.com.rmit.tankbattle.sprites.tank;
+package com.wang.game.tankbattle.sprites.tank;
 
-import au.com.rmit.Game2dEngine.sprite.Sprite;
-import au.com.rmit.tankbattle.common.Common;
-import au.com.rmit.tankbattle.other.Wall;
-import au.com.rmit.tankbattle.scene.TankBattleScene;
-import au.com.rmit.tankbattle.sprites.missile.EnemyMissile;
-import au.com.rmit.tankbattle.sprites.missile.Missile;
+import com.wang.Game2dEngine.sprite.Sprite;
+import com.wang.game.tankbattle.common.Common;
+import com.wang.game.tankbattle.other.Wall;
+import com.wang.game.tankbattle.scene.TankBattleScene;
+import com.wang.game.tankbattle.sprites.missile.EnemyMissile;
+import com.wang.game.tankbattle.sprites.missile.Missile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
