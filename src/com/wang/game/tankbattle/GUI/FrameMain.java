@@ -39,9 +39,16 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
     {
 
         panelGame = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        btnStart = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuGame = new javax.swing.JMenu();
+        menuStart = new javax.swing.JMenuItem();
+        menuPause = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        menuExit = new javax.swing.JMenuItem();
+        menuOption = new javax.swing.JMenu();
+        menuSettings = new javax.swing.JMenuItem();
+        menuHelp = new javax.swing.JMenu();
+        menuAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter()
@@ -73,32 +80,61 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
         );
         panelGameLayout.setVerticalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelGame, java.awt.BorderLayout.CENTER);
 
-        btnStart.setText("Start");
-        btnStart.addActionListener(new java.awt.event.ActionListener()
+        menuGame.setText("Game");
+
+        menuStart.setText("Start");
+        menuStart.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnStartActionPerformed(evt);
+                menuStartActionPerformed(evt);
             }
         });
-        jPanel1.add(btnStart);
+        menuGame.add(menuStart);
 
-        btnClose.setText("Close");
-        btnClose.addActionListener(new java.awt.event.ActionListener()
+        menuPause.setText("Pause");
+        menuPause.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btnCloseActionPerformed(evt);
+                menuPauseActionPerformed(evt);
             }
         });
-        jPanel1.add(btnClose);
+        menuGame.add(menuPause);
+        menuGame.add(jSeparator1);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        menuExit.setText("Exit");
+        menuExit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                menuExitActionPerformed(evt);
+            }
+        });
+        menuGame.add(menuExit);
+
+        jMenuBar1.add(menuGame);
+
+        menuOption.setText("Option");
+
+        menuSettings.setText("Settings");
+        menuOption.add(menuSettings);
+
+        jMenuBar1.add(menuOption);
+
+        menuHelp.setText("Help");
+
+        menuAbout.setText("About");
+        menuHelp.add(menuAbout);
+
+        jMenuBar1.add(menuHelp);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -120,38 +156,39 @@ public class FrameMain extends javax.swing.JFrame implements KeyListener
         }
     }//GEN-LAST:event_formComponentResized
 
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnStartActionPerformed
-    {//GEN-HEADEREND:event_btnStartActionPerformed
+    private void menuStartActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuStartActionPerformed
+    {//GEN-HEADEREND:event_menuStartActionPerformed
         if (theScene == null)
         {
             theScene = new TankBattleScene();
             Director.getSharedInstance().showScene(theScene);
             theScene.gameStart();
-        } else
-        {
-            theScene.pause();
-        }
-
-        if (theScene.isScenePaused())
-        {
-            btnStart.setText("Continue");
-        } else
-        {
-            btnStart.setText("Pause");
         }
 
         this.requestFocus();
-    }//GEN-LAST:event_btnStartActionPerformed
+    }//GEN-LAST:event_menuStartActionPerformed
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCloseActionPerformed
-    {//GEN-HEADEREND:event_btnCloseActionPerformed
+    private void menuPauseActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuPauseActionPerformed
+    {//GEN-HEADEREND:event_menuPauseActionPerformed
+        if (theScene != null) theScene.pause();
+    }//GEN-LAST:event_menuPauseActionPerformed
+
+    private void menuExitActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuExitActionPerformed
+    {//GEN-HEADEREND:event_menuExitActionPerformed
         exit(0);
-    }//GEN-LAST:event_btnCloseActionPerformed
+    }//GEN-LAST:event_menuExitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnStart;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem menuAbout;
+    private javax.swing.JMenuItem menuExit;
+    private javax.swing.JMenu menuGame;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenu menuOption;
+    private javax.swing.JMenuItem menuPause;
+    private javax.swing.JMenuItem menuSettings;
+    private javax.swing.JMenuItem menuStart;
     private javax.swing.JPanel panelGame;
     // End of variables declaration//GEN-END:variables
 
