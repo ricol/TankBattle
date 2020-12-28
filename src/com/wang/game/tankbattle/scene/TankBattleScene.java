@@ -9,7 +9,7 @@ import com.wang.Game2dEngine.action.AlphaByAction;
 import com.wang.Game2dEngine.action.AlphaToAction;
 import com.wang.Game2dEngine.sprite.UI.SLabel;
 import com.wang.Game2dEngine.sprite.Sprite;
-import com.wang.math.geometry.ClosureShape;
+import com.wang.math.geometry.ConfinedShape;
 import com.wang.math.geometry.SpecialRectangleShape;
 import com.wang.game.tankbattle.common.Common;
 import com.wang.game.tankbattle.other.Score;
@@ -71,9 +71,9 @@ public class TankBattleScene extends WallScene
                 Tank aTank = (Tank) aSprite;
 
                 IEShape theShape = aTank.getTheShape();
-                if (theShape instanceof ClosureShape)
+                if (theShape instanceof ConfinedShape)
                 {
-                    ClosureShape aClosureShape = (ClosureShape) theShape;
+                    ConfinedShape aClosureShape = (ConfinedShape) theShape;
                     if (aClosureShape.collideWith(area))
                     {
                         bCollide = true;
