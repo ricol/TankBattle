@@ -107,8 +107,14 @@ public class EnemyTank extends Tank implements ActionListener
     {
         super.onCollideWith(target); //To change body of generated methods, choose Tools | Templates.
 
+        System.out.println(this + " collided with " + target);
         if (target instanceof Wall)
         {
+            System.out.println(this + " collided with " + target + " [Wall]");
+            this.changeMovingDirection(this.theDirection);
+        }else if (target instanceof EnemyTank)
+        {
+            System.out.println(this + " collided with " + target + " [EnemyTank]");
             this.changeMovingDirection(this.theDirection);
         }
     }
